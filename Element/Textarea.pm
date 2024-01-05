@@ -125,7 +125,7 @@ __END__
 
 =head1 NAME
 
-Tags::HTML::Element::Textarea - Tags helper for textareaelement.
+Tags::HTML::Element::Textarea - Tags helper for HTML textarea element.
 
 =head1 SYNOPSIS
 

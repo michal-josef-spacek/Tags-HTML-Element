@@ -107,7 +107,7 @@ __END__
 
 =head1 NAME
 
-Tags::HTML::Element::Select - Tags helper for form select element.
+Tags::HTML::Element::Select - Tags helper for HTML select element.
 
 =head1 SYNOPSIS
 

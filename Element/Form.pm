@@ -294,7 +294,7 @@ __END__
 
 =head1 NAME
 
-Tags::HTML::Element::Form - Tags helper for form.
+Tags::HTML::Element::Form - Tags helper for HTML form element.
 
 =head1 SYNOPSIS
 

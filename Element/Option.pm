@@ -89,7 +89,7 @@ __END__
 
 =head1 NAME
 
-Tags::HTML::Element::Option - Tags helper for form option element.
+Tags::HTML::Element::Option - Tags helper for HTML option element.
 
 =head1 SYNOPSIS
 

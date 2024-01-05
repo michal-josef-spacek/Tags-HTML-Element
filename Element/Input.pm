@@ -127,7 +127,7 @@ __END__
 
 =head1 NAME
 
-Tags::HTML::Element::Input - Tags helper for form input element.
+Tags::HTML::Element::Input - Tags helper for HTML input element.
 
 =head1 SYNOPSIS
 
