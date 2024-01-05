@@ -1,0 +1,23 @@
+NAME
+    Data::HTML::Element - Data objects for HTML elements.
+
+SEE ALSO
+    Tags::HTML::Element::Button
+        TODO
+
+REPOSITORY
+    <https://github.com/michal-josef-spacek/Tags-HTML-Element>
+
+AUTHOR
+    Michal Špaček <mailto:skim@cpan.org>
+
+    <http://skim.cz>
+
+LICENSE AND COPYRIGHT
+    © 2022-2024 Michal Josef Špaček
+
+    BSD 2-Clause License
+
+VERSION
+    0.01
+
