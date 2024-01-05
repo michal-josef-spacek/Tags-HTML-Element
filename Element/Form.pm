@@ -186,7 +186,8 @@ sub _process {
 			$self->{'input'}->init($field);
 			$self->{'input'}->process;
 		} elsif ($field->isa('Data::HTML::Element::Select')) {
-			$self->{'select'}->process($field);
+			$self->{'select'}->init($field);
+			$self->{'select'}->process;
 		} else {
 			$self->{'textarea'}->init($field);
 			$self->{'textarea'}->process;

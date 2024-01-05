@@ -11,8 +11,15 @@ use Tags::HTML::Element::Option;
 
 our $VERSION = 0.01;
 
-# Process 'Tags'.
-sub _process {
+sub _cleanup {
+	my $self = shift;
+
+	delete $self->{'_select'};
+
+	return;
+}
+
+sub _init {
 	my ($self, $select) = @_;
 
 	# Check input.
@@ -23,25 +30,39 @@ sub _process {
 		err "Select object must be a 'Data::HTML::Element::Select' instance.";
 	}
 
+	$self->{'_select'} = $select;
+
+	return;
+}
+
+# Process 'Tags'.
+sub _process {
+	my $self = shift;
+
+	if (! exists $self->{'_select'}) {
+		return;
+	}
+
 	$self->{'tags'}->put(
 		['b', 'select'],
-		defined $select->css_class ? (
-			['a', 'class', $select->css_class],
+		defined $self->{'_select'}->css_class ? (
+			['a', 'class', $self->{'_select'}->css_class],
 		) : (),
-		defined $select->id ? (
-			['a', 'name', $select->id],
-			['a', 'id', $select->id],
+		defined $self->{'_select'}->id ? (
+			['a', 'name', $self->{'_select'}->id],
+			['a', 'id', $self->{'_select'}->id],
 		) : (),
-		defined $select->size ? (
-			['a', 'size', $select->size],
+		defined $self->{'_select'}->size ? (
+			['a', 'size', $self->{'_select'}->size],
 		) : (),
-		$select->disabled ? (
+		$self->{'_select'}->disabled ? (
 			['a', 'disabled', 'disabled'],
 		) : (),
 		# TODO Other. https://www.w3schools.com/tags/tag_select.asp
 	);
-	foreach my $option (@{$select->options}) {
-		$self->{'_option'}->process($option);
+	foreach my $option (@{$self->{'_select'}->options}) {
+		$self->{'_option'}->init($option);
+		$self->{'_option'}->process;
 	}
 	$self->{'tags'}->put(
 		['e', 'select'],
@@ -51,19 +72,15 @@ sub _process {
 }
 
 sub _process_css {
-	my ($self, $select) = @_;
+	my $self = shift;
 
-	# Check select.
-	if (! defined $select
-		|| ! blessed($select)
-		|| ! $select->isa('Data::HTML::Element::Select')) {
-
-		err "Select object must be a 'Data::HTML::Element::Select' instance.";
+	if (! exists $self->{'_select'}) {
+		return;
 	}
 
 	my $css_class = '';
-	if (defined $select->css_class) {
-		$css_class = '.'.$select->css_class;
+	if (defined $self->{'_select'}->css_class) {
+		$css_class = '.'.$self->{'_select'}->css_class;
 	}
 
 	$self->{'css'}->put(
@@ -77,8 +94,8 @@ sub _process_css {
 		['d', 'box-sizing', 'border-box'],
 		['e'],
 	);
-	if (@{$select->options}) {
-		$self->{'_option'}->process_css($select->options->[0]);
+	if (@{$self->{'_select'}->options}) {
+		$self->{'_option'}->process_css;
 	}
 
 	return;
