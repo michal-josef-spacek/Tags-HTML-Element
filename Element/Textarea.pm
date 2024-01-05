@@ -294,7 +294,7 @@ L<Tags::HTML>.
 
 =head1 REPOSITORY
 
-L<https://github.com/michal-josef-spacek/Tags-HTML-Textarea>
+L<https://github.com/michal-josef-spacek/Tags-HTML-Element>
 
 =head1 AUTHOR
 
@@ -304,12 +304,12 @@ L<http://skim.cz>
 
 =head1 LICENSE AND COPYRIGHT
 
-© 2023 Michal Josef Špaček
+© 2023-2024 Michal Josef Špaček
 
 BSD 2-Clause License
 
 =head1 VERSION
 
-0.02
+0.01
 
 =cut
