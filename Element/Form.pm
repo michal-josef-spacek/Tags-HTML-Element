@@ -183,7 +183,8 @@ sub _process {
 		);
 
 		if ($field->isa('Data::HTML::Element::Input')) {
-			$self->{'input'}->process($field);
+			$self->{'input'}->init($field);
+			$self->{'input'}->process;
 		} elsif ($field->isa('Data::HTML::Element::Select')) {
 			$self->{'select'}->process($field);
 		} else {
@@ -202,7 +203,8 @@ sub _process {
 		['b', 'p'],
 	);
 	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
-		$self->{'input'}->process($self->{'submit'});
+		$self->{'input'}->init($self->{'submit'});
+		$self->{'input'}->process;
 	} else {
 		$self->{'button'}->init($self->{'submit'});
 		$self->{'button'}->process;

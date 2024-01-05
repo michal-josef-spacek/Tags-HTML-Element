@@ -18,7 +18,8 @@ my $input = Data::HTML::Element::Input->new(
 	'value' => 'Custom save',
 	'type' => 'submit',
 );
-$obj->process_css($input);
+$obj->init($input);
+$obj->process_css;
 my $ret_ar = $css->flush(1);
 is_deeply(
 	$ret_ar,
@@ -67,7 +68,8 @@ $input = Data::HTML::Element::Input->new(
 	'value' => 'Custom save',
 	'type' => 'submit',
 );
-$obj->process_css($input);
+$obj->init($input);
+$obj->process_css;
 $ret_ar = $css->flush(1);
 is_deeply(
 	$ret_ar,

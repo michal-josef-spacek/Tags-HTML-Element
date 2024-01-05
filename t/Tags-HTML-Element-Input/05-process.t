@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Input;
 use Tags::Output::Structure;
-use Test::More 'tests' => 5;
+use Test::More 'tests' => 4;
 use Test::NoWarnings;
 
 # Test.
@@ -18,7 +18,8 @@ my $input = Data::HTML::Element::Input->new(
 	'value' => 'Custom save',
 	'type' => 'submit',
 );
-$obj->process($input);
+$obj->init($input);
+$obj->process;
 my $ret_ar = $tags->flush(1);
 is_deeply(
 	$ret_ar,
@@ -40,7 +41,8 @@ $input = Data::HTML::Element::Input->new(
 	'checked' => 0,
 	'type' => 'checkbox',
 );
-$obj->process($input);
+$obj->init($input);
+$obj->process;
 $ret_ar = $tags->flush(1);
 is_deeply(
 	$ret_ar,
@@ -59,16 +61,4 @@ eval {
 };
 is($EVAL_ERROR, "Parameter 'tags' isn't defined.\n",
 	"Parameter 'tags' isn't defined.");
-clean();
-
-# Test.
-$tags = Tags::Output::Structure->new;
-$obj = Tags::HTML::Element::Input->new(
-	'tags' => $tags,
-);
-eval {
-	$obj->process('bad');
-};
-is($EVAL_ERROR, "Input object must be a 'Data::HTML::Element::Input' instance.\n",
-	"Input object must be a 'Data::HTML::Element::Input' instance.");
 clean();

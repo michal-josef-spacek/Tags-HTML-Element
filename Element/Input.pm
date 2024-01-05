@@ -10,8 +10,15 @@ use Scalar::Util qw(blessed);
 
 our $VERSION = 0.01;
 
-# Process 'Tags'.
-sub _process {
+sub _cleanup {
+	my $self = shift;
+
+	delete $self->{'_input'};
+
+	return;
+}
+
+sub _init {
 	my ($self, $input) = @_;
 
 	# Check input.
@@ -22,42 +29,55 @@ sub _process {
 		err "Input object must be a 'Data::HTML::Element::Input' instance.";
 	}
 
+	$self->{'_input'} = $input;
+
+	return;
+}
+
+# Process 'Tags'.
+sub _process {
+	my $self = shift;
+
+	if (! $self->{'_input'}) {
+		return;
+	}
+
 	$self->{'tags'}->put(
 		['b', 'input'],
-		$input->autofocus ? (
+		$self->{'_input'}->autofocus ? (
 			['a', 'autofocus', 'autofocus'],
 		) : (),
-		defined $input->css_class ? (
-			['a', 'class', $input->css_class],
+		defined $self->{'_input'}->css_class ? (
+			['a', 'class', $self->{'_input'}->css_class],
 		) : (),
-		['a', 'type', $input->type],
-		defined $input->id ? (
-			['a', 'name', $input->id],
-			['a', 'id', $input->id],
+		['a', 'type', $self->{'_input'}->type],
+		defined $self->{'_input'}->id ? (
+			['a', 'name', $self->{'_input'}->id],
+			['a', 'id', $self->{'_input'}->id],
 		) : (),
-		defined $input->value ? (
-			['a', 'value', $input->value],
+		defined $self->{'_input'}->value ? (
+			['a', 'value', $self->{'_input'}->value],
 		) : (),
-		$input->checked ? (
+		$self->{'_input'}->checked ? (
 			['a', 'checked', 'checked'],
 		) : (),
-		defined $input->placeholder ? (
-			['a', 'placeholder', $input->placeholder],
+		defined $self->{'_input'}->placeholder ? (
+			['a', 'placeholder', $self->{'_input'}->placeholder],
 		) : (),
-		defined $input->size ? (
-			['a', 'size', $input->size],
+		defined $self->{'_input'}->size ? (
+			['a', 'size', $self->{'_input'}->size],
 		) : (),
-		defined $input->readonly ? (
+		defined $self->{'_input'}->readonly ? (
 			['a', 'readonly', 'readonly'],
 		) : (),
-		defined $input->disabled ? (
+		defined $self->{'_input'}->disabled ? (
 			['a', 'disabled', 'disabled'],
 		) : (),
-		defined $input->min ? (
-			['a', 'min', $input->min],
+		defined $self->{'_input'}->min ? (
+			['a', 'min', $self->{'_input'}->min],
 		) : (),
-		defined $input->max ? (
-			['a', 'max', $input->max],
+		defined $self->{'_input'}->max ? (
+			['a', 'max', $self->{'_input'}->max],
 		) : (),
 		['e', 'input'],
 	);
@@ -66,19 +86,15 @@ sub _process {
 }
 
 sub _process_css {
-	my ($self, $input) = @_;
+	my $self = shift;
 
-	# Check input.
-	if (! defined $input
-		|| ! blessed($input)
-		|| ! $input->isa('Data::HTML::Element::Input')) {
-
-		err "Input object must be a 'Data::HTML::Element::Input' instance.";
+	if (! $self->{'_input'}) {
+		return;
 	}
 
 	my $css_class = '';
-	if (defined $input->css_class) {
-		$css_class = '.'.$input->css_class;
+	if (defined $self->{'_input'}->css_class) {
+		$css_class = '.'.$self->{'_input'}->css_class;
 	}
 
 	$self->{'css'}->put(
@@ -134,8 +150,10 @@ Tags::HTML::Element::Input - Tags helper for HTML input element.
  use Tags::HTML::Element::Input;
 
  my $obj = Tags::HTML::Element::Input->new(%params);
- $obj->process($input);
- $obj->process_css($input);
+ $obj->cleanup;
+ $obj->init($input);
+ $obj->process;
+ $obj->process_css;
 
 =head1 METHODS
 
@@ -161,21 +179,37 @@ Default value is undef.
 
 =back
 
-=head2 C<process>
+=head2 C<cleanup>
 
- $obj->process($input);
+ $obj->cleanup;
 
-Process Tags structure for fields defined in C<@fields> to output.
+Cleanup internal structures.
+
+Returns undef.
+
+=head2 C<init>
+
+ $obj->init($input);
+
+Initialize object.
 
 Accepted C<$input> is L<Data::HTML::Element::Input>.
 
 Returns undef.
 
+=head2 C<process>
+
+ $obj->process;
+
+Process L<Tags> structure to output.
+
+Returns undef.
+
 =head2 C<process_css>
 
- $obj->process_css($input);
+ $obj->process_css;
 
-Process CSS::Struct structure for output.
+Process L<CSS::Struct> structure for output.
 
 Returns undef.
 
@@ -223,9 +257,12 @@ Returns undef.
          'css_class' => 'form-input',
  );
 
+ # Initialize.
+ $obj->init($input);
+
  # Process input.
- $obj->process($input);
- $obj->process_css($input);
+ $obj->process;
+ $obj->process_css;
 
  # Print out.
  print "HTML:\n";
@@ -281,7 +318,7 @@ L<http://skim.cz>
 
 =head1 LICENSE AND COPYRIGHT
 
-© 2022-2023 Michal Josef Špaček
+© 2022-2024 Michal Josef Špaček
 
 BSD 2-Clause License
 
