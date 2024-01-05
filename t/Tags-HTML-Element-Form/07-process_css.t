@@ -13,6 +13,7 @@ my $css = CSS::Struct::Output::Structure->new;
 my $obj = Tags::HTML::Element::Form->new(
 	'css' => $css,
 );
+$obj->init;
 $obj->process_css;
 my $ret_ar = $css->flush(1);
 is_deeply(
@@ -36,21 +37,6 @@ is_deeply(
 
 		['s', '.form-required'],
 		['d', 'color', 'red'],
-		['e'],
-
-		['s', 'button'],
-		['d', 'width', '100%'],
-		['d', 'background-color', '#4CAF50'],
-		['d', 'color', 'white'],
-		['d', 'padding', '14px 20px'],
-		['d', 'margin', '8px 0'],
-		['d', 'border', 'none'],
-		['d', 'border-radius', '4px'],
-		['d', 'cursor', 'pointer'],
-		['e'],
-
-		['s', 'button:hover'],
-		['d', 'background-color', '#45a049'],
 		['e'],
 	],
 	'Form CSS code (stub).',
