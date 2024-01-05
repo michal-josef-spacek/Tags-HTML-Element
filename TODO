@@ -1,0 +1,19 @@
+TODO
+====
+1. _tags_value() move to Utils.
+2. _tags_boolean() move to Utils.
+3. Rewrite Input to _tags_value()
+4. Form: Add tests.
+5. Form: Optimize CSS
+6. Form: Example to doc as psgi server.
+7. Form: Look to CSS selector '$css-class input, textarea' in Form. If select
+   >>$css_class textarea<< or simple textarea.
+8. Form: Helper for button element.
+9. Form: CSS style for option.
+10. Form: Test other input[type=*] and CSS. And add selector to CSS.
+11. Form:Remove 'submit' param and add to fields. For possibility of two submit
+buttons or other.
+12.
+
+Applied
+=======
