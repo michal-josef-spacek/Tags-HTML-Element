@@ -10,8 +10,15 @@ use Scalar::Util qw(blessed);
 
 our $VERSION = 0.01;
 
-# Process 'Tags'.
-sub _process {
+sub _cleanup {
+	my $self = shift;
+
+	delete $self->{'_option'};
+
+	return;
+}
+
+sub _init {
 	my ($self, $option) = @_;
 
 	# Check input.
@@ -22,32 +29,45 @@ sub _process {
 		err "Option object must be a 'Data::HTML::Element::Option' instance.";
 	}
 
+	$self->{'_option'} = $option;
+
+	return;
+}
+
+# Process 'Tags'.
+sub _process {
+	my $self = shift;
+
+	if (! exists $self->{'_option'}) {
+		return;
+	}
+
 	$self->{'tags'}->put(
 		['b', 'option'],
-		defined $option->css_class ? (
-			['a', 'class', $option->css_class],
+		defined $self->{'_option'}->css_class ? (
+			['a', 'class', $self->{'_option'}->css_class],
 		) : (),
-		defined $option->id ? (
-			['a', 'name', $option->id],
-			['a', 'id', $option->id],
+		defined $self->{'_option'}->id ? (
+			['a', 'name', $self->{'_option'}->id],
+			['a', 'id', $self->{'_option'}->id],
 		) : (),
-		$option->disabled ? (
+		$self->{'_option'}->disabled ? (
 			['a', 'disabled', 'disabled'],
 		) : (),
-		$option->selected ? (
+		$self->{'_option'}->selected ? (
 			['a', 'selected', 'selected'],
 		) : (),
-		defined $option->value ? (
-			['a', 'value', $option->value],
+		defined $self->{'_option'}->value ? (
+			['a', 'value', $self->{'_option'}->value],
 		) : (),
 		# TODO Other. https://www.w3schools.com/tags/tag_option.asp
 	);
-	if ($option->data_type eq 'plain') {
+	if ($self->{'_option'}->data_type eq 'plain') {
 		$self->{'tags'}->put(
-			['d', $option->data],
+			['d', $self->{'_option'}->data],
 		);
-	} elsif ($option->data_type eq 'tags') {
-		$self->{'tags'}->put($option->data);
+	} elsif ($self->{'_option'}->data_type eq 'tags') {
+		$self->{'tags'}->put($self->{'_option'}->data);
 	}
 	$self->{'tags'}->put(
 		['e', 'option'],
@@ -57,19 +77,15 @@ sub _process {
 }
 
 sub _process_css {
-	my ($self, $option) = @_;
+	my $self = shift;
 
-	# Check option.
-	if (! defined $option
-		|| ! blessed($option)
-		|| ! $option->isa('Data::HTML::Element::Option')) {
-
-		err "Option object must be a 'Data::HTML::Element::Option' instance.";
+	if (! exists $self->{'_option'}) {
+		return;
 	}
 
 	my $css_class = '';
-	if (defined $option->css_class) {
-		$css_class = '.'.$option->css_class;
+	if (defined $self->{'_option'}->css_class) {
+		$css_class = '.'.$self->{'_option'}->css_class;
 	}
 
 	$self->{'css'}->put(
