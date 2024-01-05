@@ -11,19 +11,6 @@ use Tags::HTML::Element::Option;
 
 our $VERSION = 0.01;
 
-sub new {
-	my ($class, @params) = @_;
-
-	my $self = $class->SUPER::new(@params);
-
-	$self->{'_option'} = Tags::HTML::Element::Option->new(
-		'css' => $self->{'css'},
-		'tags' => $self->{'tags'},
-	);
-
-	return $self;
-}
-
 # Process 'Tags'.
 sub _process {
 	my ($self, $select) = @_;
