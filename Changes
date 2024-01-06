@@ -1,4 +1,5 @@
 0.02
+ - Add Utils module with helpers.
  - Add tests for A.
  - Fix A serialization for Tags structure.
  - Fix test dependencies.

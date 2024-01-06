@@ -8,6 +8,7 @@ Element/Input.pm
 Element/Option.pm
 Element/Select.pm
 Element/Textarea.pm
+Element/Utils.pm
 examples/create_and_print_a.pl
 examples/create_and_print_button.pl
 examples/create_and_print_input.pl
@@ -75,6 +76,8 @@ t/Tags-HTML-Element-Textarea/04-cleanup.t
 t/Tags-HTML-Element-Textarea/05-init.t
 t/Tags-HTML-Element-Textarea/06-process.t
 t/Tags-HTML-Element-Textarea/07-process_css.t
+t/Tags-HTML-Element-Utils/01-use.t
+t/Tags-HTML-Element-Utils/02-version.t
 t/Tags-HTML-Element/01-use.t
 t/Tags-HTML-Element/02-version.t
 xt/Tags-HTML-Element-A/01-pod_coverage.t
@@ -91,6 +94,8 @@ xt/Tags-HTML-Element-Select/01-pod_coverage.t
 xt/Tags-HTML-Element-Select/02-pod.t
 xt/Tags-HTML-Element-Textarea/01-pod_coverage.t
 xt/Tags-HTML-Element-Textarea/02-pod.t
+xt/Tags-HTML-Element-Utils/01-pod_coverage.t
+xt/Tags-HTML-Element-Utils/02-pod.t
 xt/Tags-HTML-Element/01-pod_coverage.t
 xt/Tags-HTML-Element/02-pod.t
 xt/Tags-HTML-Form-Select/01-pod_coverage.t

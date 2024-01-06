@@ -7,6 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_value);
 
 our $VERSION = 0.02;
 
@@ -44,17 +45,17 @@ sub _process {
 
 	$self->{'tags'}->put(
 		['b', 'textarea'],
-		$self->_tags_boolean($self->{'_textarea'}, 'autofocus'),
-		$self->_tags_value($self->{'_textarea'}, 'css_class', 'class'),
-		$self->_tags_value($self->{'_textarea'}, 'id'),
-		$self->_tags_value($self->{'_textarea'}, 'name'),
-		$self->_tags_value($self->{'_textarea'}, 'placeholder'),
-		$self->_tags_boolean($self->{'_textarea'}, 'readonly'),
-		$self->_tags_boolean($self->{'_textarea'}, 'disabled'),
-		$self->_tags_boolean($self->{'_textarea'}, 'required'),
-		$self->_tags_value($self->{'_textarea'}, 'cols'),
-		$self->_tags_value($self->{'_textarea'}, 'rows'),
-		$self->_tags_value($self->{'_textarea'}, 'form'),
+		tags_boolean($self, $self->{'_textarea'}, 'autofocus'),
+		tags_value($self, $self->{'_textarea'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_textarea'}, 'id'),
+		tags_value($self, $self->{'_textarea'}, 'name'),
+		tags_value($self, $self->{'_textarea'}, 'placeholder'),
+		tags_boolean($self, $self->{'_textarea'}, 'readonly'),
+		tags_boolean($self, $self->{'_textarea'}, 'disabled'),
+		tags_boolean($self, $self->{'_textarea'}, 'required'),
+		tags_value($self, $self->{'_textarea'}, 'cols'),
+		tags_value($self, $self->{'_textarea'}, 'rows'),
+		tags_value($self, $self->{'_textarea'}, 'form'),
 		defined $self->{'_textarea'}->value ? (
 			['d', $self->{'_textarea'}->value],
 		) : (),
@@ -89,30 +90,6 @@ sub _process_css {
 	);
 
 	return;
-}
-
-sub _tags_boolean {
-	my ($self, $textarea, $method) = @_;
-
-	if ($textarea->$method) {
-		return (['a', $method, $method]);
-	}
-
-	return ();
-}
-
-sub _tags_value {
-	my ($self, $textarea, $method, $method_rewrite) = @_;
-
-	if (defined $textarea->$method) {
-		return ([
-			'a',
-			defined $method_rewrite ? $method_rewrite : $method,
-			$textarea->$method,
-		]);
-	}
-
-	return ();
 }
 
 1;
@@ -290,7 +267,8 @@ Returns undef.
 L<Class::Utils>,
 L<Error::Pure>,
 L<Scalar::Util>,
-L<Tags::HTML>.
+L<Tags::HTML>,
+L<Tags::HTML::Element::Utils>.
 
 =head1 REPOSITORY
 

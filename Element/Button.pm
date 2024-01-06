@@ -7,6 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_value);
 
 our $VERSION = 0.02;
 
@@ -45,12 +46,12 @@ sub _process {
 	$self->{'tags'}->put(
 		['b', 'button'],
 		['a', 'type', $self->{'_button'}->type],
-		$self->_tags_value($self->{'_button'}, 'css_class', 'class'),
-		$self->_tags_value($self->{'_button'}, 'name'),
-		$self->_tags_value($self->{'_button'}, 'id'),
-		$self->_tags_value($self->{'_button'}, 'value'),
-		$self->_tags_boolean($self->{'_button'}, 'autofocus'),
-		$self->_tags_boolean($self->{'_button'}, 'disabled'),
+		tags_value($self, $self->{'_button'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_button'}, 'name'),
+		tags_value($self, $self->{'_button'}, 'id'),
+		tags_value($self, $self->{'_button'}, 'value'),
+		tags_boolean($self, $self->{'_button'}, 'autofocus'),
+		tags_boolean($self, $self->{'_button'}, 'disabled'),
 	);
 	if ($self->{'_button'}->data_type eq 'tags') {
 		$self->{'tags'}->put(@{$self->{'_button'}->data});
@@ -96,30 +97,6 @@ sub _process_css {
 	);
 
 	return;
-}
-
-sub _tags_boolean {
-	my ($self, $object, $method) = @_;
-
-	if ($object->$method) {
-		return (['a', $method, $method]);
-	}
-
-	return ();
-}
-
-sub _tags_value {
-	my ($self, $object, $method, $method_rewrite) = @_;
-
-	if (defined $object->$method) {
-		return ([
-			'a',
-			defined $method_rewrite ? $method_rewrite : $method,
-			$object->$method,
-		]);
-	}
-
-	return ();
 }
 
 1;
@@ -300,7 +277,8 @@ Returns undef.
 L<Class::Utils>,
 L<Error::Pure>,
 L<Scalar::Util>,
-L<Tags::HTML>.
+L<Tags::HTML>,
+L<Tags::HTML::Element::Utils>.
 
 =head1 REPOSITORY
 

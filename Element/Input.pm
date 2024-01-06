@@ -7,6 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
+use Tags::HTML::Element::Utils qw(tags_boolean);
 
 our $VERSION = 0.02;
 
@@ -44,9 +45,7 @@ sub _process {
 
 	$self->{'tags'}->put(
 		['b', 'input'],
-		$self->{'_input'}->autofocus ? (
-			['a', 'autofocus', 'autofocus'],
-		) : (),
+		tags_boolean($self, $self->{'_input'}, 'autofocus'),
 		defined $self->{'_input'}->css_class ? (
 			['a', 'class', $self->{'_input'}->css_class],
 		) : (),
@@ -58,21 +57,15 @@ sub _process {
 		defined $self->{'_input'}->value ? (
 			['a', 'value', $self->{'_input'}->value],
 		) : (),
-		$self->{'_input'}->checked ? (
-			['a', 'checked', 'checked'],
-		) : (),
+		tags_boolean($self, $self->{'_input'}, 'checked'),
 		defined $self->{'_input'}->placeholder ? (
 			['a', 'placeholder', $self->{'_input'}->placeholder],
 		) : (),
 		defined $self->{'_input'}->size ? (
 			['a', 'size', $self->{'_input'}->size],
 		) : (),
-		defined $self->{'_input'}->readonly ? (
-			['a', 'readonly', 'readonly'],
-		) : (),
-		defined $self->{'_input'}->disabled ? (
-			['a', 'disabled', 'disabled'],
-		) : (),
+		tags_boolean($self, $self->{'_input'}, 'readonly'),
+		tags_boolean($self, $self->{'_input'}, 'disabled'),
 		defined $self->{'_input'}->min ? (
 			['a', 'min', $self->{'_input'}->min],
 		) : (),
@@ -304,7 +297,8 @@ Returns undef.
 L<Class::Utils>,
 L<Error::Pure>,
 L<Scalar::Util>,
-L<Tags::HTML>.
+L<Tags::HTML>,
+L<Tags::HTML::Element::Utils>.
 
 =head1 REPOSITORY
 

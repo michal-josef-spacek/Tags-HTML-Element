@@ -1,7 +1,5 @@
 TODO
 ====
-1. _tags_value() move to Utils.
-2. _tags_boolean() move to Utils.
 3. Rewrite Input to _tags_value()
 4. Form: Add tests.
 5. Form: Optimize CSS
@@ -13,9 +11,17 @@ TODO
 10. Form: Test other input[type=*] and CSS. And add selector to CSS.
 11. Form:Remove 'submit' param and add to fields. For possibility of two submit
 buttons or other.
-13.
+13. Add doc for Utils.
+14. Add tests for Utils.
+15.
 
 Applied
 =======
 12. A: Add tests.
+OK [20240107] skim
+
+1. _tags_value() move to Utils.
+OK [20240107] skim
+
+2. _tags_boolean() move to Utils.
 OK [20240107] skim
