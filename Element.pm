@@ -21,6 +21,10 @@ Data::HTML::Element - Data objects for HTML elements.
 
 =over
 
+=item L<Tags::HTML::Element::A>
+
+Tags helper for HTML a element.
+
 =item L<Tags::HTML::Element::Button>
 
 Tags helper for HTML button element.

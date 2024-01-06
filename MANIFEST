@@ -1,12 +1,14 @@
 Changes
 CONCEPT
 Element.pm
+Element/A.pm
 Element/Button.pm
 Element/Form.pm
 Element/Input.pm
 Element/Option.pm
 Element/Select.pm
 Element/Textarea.pm
+examples/create_and_print_a.pl
 examples/create_and_print_button.pl
 examples/create_and_print_textarea.pl
 inc/Module/Install.pm
@@ -25,6 +27,8 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
+t/Tags-HTML-Element-A/01-use.t
+t/Tags-HTML-Element-A/02-version.t
 t/Tags-HTML-Element-Button/01-use.t
 t/Tags-HTML-Element-Button/02-version.t
 t/Tags-HTML-Element-Button/03-new.t
@@ -63,6 +67,8 @@ t/Tags-HTML-Element-Textarea/06-process.t
 t/Tags-HTML-Element-Textarea/07-process_css.t
 t/Tags-HTML-Element/01-use.t
 t/Tags-HTML-Element/02-version.t
+xt/Tags-HTML-Element-A/01-pod_coverage.t
+xt/Tags-HTML-Element-A/02-pod.t
 xt/Tags-HTML-Element-Button/01-pod_coverage.t
 xt/Tags-HTML-Element-Button/02-pod.t
 xt/Tags-HTML-Element-Form/01-pod_coverage.t

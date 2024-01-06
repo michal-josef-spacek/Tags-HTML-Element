@@ -2,6 +2,9 @@ NAME
     Data::HTML::Element - Data objects for HTML elements.
 
 SEE ALSO
+    Tags::HTML::Element::A
+        Tags helper for HTML a element.
+
     Tags::HTML::Element::Button
         Tags helper for HTML button element.
 
