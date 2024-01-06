@@ -8,7 +8,7 @@ use Readonly;
 
 Readonly::Array our @EXPORT_OK => qw(tags_boolean tags_value);
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 sub tags_boolean {
 	my ($self, $textarea, $method) = @_;

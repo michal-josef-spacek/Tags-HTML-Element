@@ -15,7 +15,7 @@ use Tags::HTML::Element::Input;
 use Tags::HTML::Element::Select;
 use Tags::HTML::Element::Textarea;
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 # Constructor.
 sub new {
@@ -545,6 +545,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.02
+0.03
 
 =cut
