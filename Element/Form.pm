@@ -134,7 +134,7 @@ sub _init {
 
 # Process 'Tags'.
 sub _process {
-	my ($self, @fields) = @_;
+	my $self = shift;
 
 	if (! exists $self->{'_fields'}) {
 		return;
@@ -304,7 +304,9 @@ Tags::HTML::Element::Form - Tags helper for HTML form element.
  use Tags::HTML::Element::Form;
 
  my $obj = Tags::HTML::Element::Form->new(%params);
- $obj->process(@fields);
+ $obj->cleanup;
+ $obj->init(@fields);
+ $obj->process;
  $obj->process_css;
 
 =head1 METHODS
@@ -381,21 +383,31 @@ inherited with main object.
 
 =back
 
-=head2 C<process>
+=head2 C<init>
 
- $obj->process(@fields);
+ $obj->init(@fields);
 
-Process L<Tags> structure for fields defined in C<@fields> to output.
+Initialize L<Tags> structure for fields defined in C<@fields>.
 
 Accepted items in C<@fields> are objects:
 
 =over
 
-=item * L<Data::HTML::Element::Form::Input>
+=item * L<Data::HTML::Element::Input>
 
-=item * L<Data::HTML::Textarea>
+=item * L<Data::HTML::Element::Select>
+
+=item * L<Data::HTML::Element::Textarea>
 
 =back
+
+Returns undef.
+
+=head2 C<process>
+
+ $obj->process;
+
+Process L<Tags> structure to output.
 
 Returns undef.
 
