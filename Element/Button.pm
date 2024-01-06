@@ -47,6 +47,7 @@ sub _process {
 		['a', 'type', $self->{'_button'}->type],
 		$self->_tags_value($self->{'_button'}, 'css_class', 'class'),
 		$self->_tags_value($self->{'_button'}, 'name'),
+		$self->_tags_value($self->{'_button'}, 'id'),
 		$self->_tags_value($self->{'_button'}, 'value'),
 		$self->_tags_boolean($self->{'_button'}, 'autofocus'),
 		$self->_tags_boolean($self->{'_button'}, 'disabled'),
