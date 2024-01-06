@@ -41,7 +41,9 @@ print $css->flush;
 
 # Output:
 # HTML:
-# <a />
+# <a class="a" href="http://example.com">
+#   Link
+# </a>
 #
 # CSS:
-# TODO
+# - no CSS now.
