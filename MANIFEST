@@ -34,6 +34,11 @@ README
 SIGNATURE
 t/Tags-HTML-Element-A/01-use.t
 t/Tags-HTML-Element-A/02-version.t
+t/Tags-HTML-Element-A/03-new.t
+t/Tags-HTML-Element-A/04-cleanup.t
+t/Tags-HTML-Element-A/05-init.t
+t/Tags-HTML-Element-A/06-process.t
+t/Tags-HTML-Element-A/07-process_css.t
 t/Tags-HTML-Element-Button/01-use.t
 t/Tags-HTML-Element-Button/02-version.t
 t/Tags-HTML-Element-Button/03-new.t
