@@ -10,7 +10,11 @@ Element/Select.pm
 Element/Textarea.pm
 examples/create_and_print_a.pl
 examples/create_and_print_button.pl
+examples/create_and_print_input.pl
+examples/create_and_print_option.pl
+examples/create_and_print_select.pl
 examples/create_and_print_textarea.pl
+examples/default_form.pl
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm
