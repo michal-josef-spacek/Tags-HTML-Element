@@ -13,7 +13,8 @@ TODO
 10. Form: Test other input[type=*] and CSS. And add selector to CSS.
 11. Form:Remove 'submit' param and add to fields. For possibility of two submit
 buttons or other.
-12.
+12. A: Add tests.
+13.
 
 Applied
 =======
