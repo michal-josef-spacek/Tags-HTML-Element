@@ -5,12 +5,17 @@ author:
 build_requires:
   CSS::Struct::Output::Indent: 0
   CSS::Struct::Output::Raw: 0
+  CSS::Struct::Output::Structure: 0
   Data::HTML::Element::Button: 0
+  Data::HTML::Element::Form: 0
+  Data::HTML::Element::Input: 0
+  Data::HTML::Element::Select: 0
   Data::HTML::Element::Textarea: 0
   English: 0
   Error::Pure::Utils: 0
   ExtUtils::MakeMaker: 6.59
   Tags::Output::Raw: 0
+  Tags::Output::Structure: 0
   Test::MockObject: 0
   Test::More: 0
   Test::NoWarnings: 0
