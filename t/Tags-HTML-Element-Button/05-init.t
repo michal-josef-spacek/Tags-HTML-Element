@@ -48,4 +48,3 @@ eval {
 is($EVAL_ERROR, "Input object must be a 'Data::HTML::Element::Button' instance.\n",
 	"Input object must be a 'Data::HTML::Element::Button' instance.");
 clean();
-
