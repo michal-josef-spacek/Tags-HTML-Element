@@ -32,6 +32,11 @@ sub _init {
 
 	$self->{'_select'} = $select;
 
+	$self->{'_option'} = Tags::HTML::Element::Option->new(
+		'css' => $self->{'css'},
+		'tags' => $self->{'tags'},
+	);
+
 	return;
 }
 
