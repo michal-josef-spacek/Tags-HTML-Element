@@ -52,7 +52,7 @@ sub _process {
 			['d', @{$self->{'_a'}->data}],
 		);
 	} elsif ($self->{'_a'}->data_type eq 'tags') {
-		$self->{'tags'}->put($self->{'_a'}->data);
+		$self->{'tags'}->put(@{$self->{'_a'}->data});
 	}
 	$self->{'tags'}->put(
 		['e', 'a'],
