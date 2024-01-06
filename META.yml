@@ -4,7 +4,6 @@ author:
   - 'Michal Josef Spacek <skim@cpan.org>'
 build_requires:
   CSS::Struct::Output::Indent: 0
-  CSS::Struct::Output::Raw: 0
   CSS::Struct::Output::Structure: 0
   Data::HTML::Element::Button: 0
   Data::HTML::Element::Form: 0

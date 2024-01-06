@@ -2,7 +2,6 @@ use strict;
 use warnings;
 
 use CSS::Struct::Output::Indent;
-use CSS::Struct::Output::Raw;
 use Data::HTML::Element::Textarea;
 use English;
 use Error::Pure::Utils qw(clean);

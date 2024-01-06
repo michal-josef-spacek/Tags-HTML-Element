@@ -2,6 +2,7 @@
  - Fix A serialization for Tags structure.
  - Fix test dependencies.
  - Regen examples.
+ - Remove obsolete code from tests.
 
 0.01 2024-01-06T19:36:50+01:00
  - First version.
