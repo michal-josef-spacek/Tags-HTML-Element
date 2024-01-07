@@ -15,7 +15,7 @@ __END__
 
 =head1 NAME
 
-Data::HTML::Element - Data objects for HTML elements.
+Data::HTML::Element - Tags helpers for HTML elements.
 
 =head1 SEE ALSO
 

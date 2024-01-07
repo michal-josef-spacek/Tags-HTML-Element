@@ -1,5 +1,5 @@
 NAME
-    Data::HTML::Element - Data objects for HTML elements.
+    Data::HTML::Element - Tags helpers for HTML elements.
 
 SEE ALSO
     Tags::HTML::Element::A
