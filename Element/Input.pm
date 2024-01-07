@@ -7,7 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
-use Tags::HTML::Element::Utils qw(tags_boolean);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_value);
 
 our $VERSION = 0.03;
 
@@ -46,32 +46,17 @@ sub _process {
 	$self->{'tags'}->put(
 		['b', 'input'],
 		tags_boolean($self, $self->{'_input'}, 'autofocus'),
-		defined $self->{'_input'}->css_class ? (
-			['a', 'class', $self->{'_input'}->css_class],
-		) : (),
-		['a', 'type', $self->{'_input'}->type],
-		defined $self->{'_input'}->id ? (
-			['a', 'name', $self->{'_input'}->id],
-			['a', 'id', $self->{'_input'}->id],
-		) : (),
-		defined $self->{'_input'}->value ? (
-			['a', 'value', $self->{'_input'}->value],
-		) : (),
+		tags_value($self, $self->{'_input'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_input'}, 'type'),
+		tags_value($self, $self->{'_input'}, 'id'),
+		tags_value($self, $self->{'_input'}, 'value'),
 		tags_boolean($self, $self->{'_input'}, 'checked'),
-		defined $self->{'_input'}->placeholder ? (
-			['a', 'placeholder', $self->{'_input'}->placeholder],
-		) : (),
-		defined $self->{'_input'}->size ? (
-			['a', 'size', $self->{'_input'}->size],
-		) : (),
+		tags_value($self, $self->{'_input'}, 'placeholder'),
+		tags_value($self, $self->{'_input'}, 'size'),
 		tags_boolean($self, $self->{'_input'}, 'readonly'),
 		tags_boolean($self, $self->{'_input'}, 'disabled'),
-		defined $self->{'_input'}->min ? (
-			['a', 'min', $self->{'_input'}->min],
-		) : (),
-		defined $self->{'_input'}->max ? (
-			['a', 'max', $self->{'_input'}->max],
-		) : (),
+		tags_value($self, $self->{'_input'}, 'min'),
+		tags_value($self, $self->{'_input'}, 'max'),
 		['e', 'input'],
 	);
 

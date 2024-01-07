@@ -1,6 +1,5 @@
 TODO
 ====
-3. Rewrite Input to _tags_value()
 4. Form: Add tests.
 5. Form: Optimize CSS
 6. Form: Example to doc as psgi server.
@@ -24,4 +23,7 @@ OK [20240107] skim
 OK [20240107] skim
 
 2. _tags_boolean() move to Utils.
+OK [20240107] skim
+
+3. Rewrite Input to _tags_value()
 OK [20240107] skim

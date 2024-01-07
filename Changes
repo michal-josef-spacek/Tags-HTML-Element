@@ -1,5 +1,6 @@
 0.03
  - Fix module abstract.
+ - Rewrite Input to use helpers.
 
 0.02 2024-01-07T00:39:59+01:00
  - Add Utils module with helpers.
