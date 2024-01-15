@@ -15,6 +15,9 @@ my $obj = Tags::HTML::Element::Form->new(
         'tags' => $tags,
 );
 
+# Initialize.
+$obj->init;
+
 # Process form.
 $obj->process;
 $obj->process_css;
@@ -38,10 +41,18 @@ print $css->flush;
 #         background-color: #f2f2f2;
 #         padding: 20px;
 # }
-# .form input[type=submit]:hover {
-#         background-color: #45a049;
+# .form fieldset {
+#         padding: 20px;
+#         border-radius: 15px;
 # }
-# .form input[type=submit] {
+# .form legend {
+#         padding-left: 10px;
+#         padding-right: 10px;
+# }
+# .form-required {
+#         color: red;
+# }
+# button {
 #         width: 100%;
 #         background-color: #4CAF50;
 #         color: white;
@@ -51,15 +62,6 @@ print $css->flush;
 #         border-radius: 4px;
 #         cursor: pointer;
 # }
-# .form input, select, textarea {
-#         width: 100%;
-#         padding: 12px 20px;
-#         margin: 8px 0;
-#         display: inline-block;
-#         border: 1px solid #ccc;
-#         border-radius: 4px;
-#         box-sizing: border-box;
-# }
-# .form-required {
-#         color: red;
+# button:hover {
+#         background-color: #45a049;
 # }
