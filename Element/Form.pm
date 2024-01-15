@@ -85,6 +85,9 @@ sub new {
 	if ($self->{'submit'}->type ne 'submit') {
 		err "Parameter 'submit' instance has bad type.";
 	}
+	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
+		$self->{'_css_input'} = 1;
+	}
 
 	$self->_tags_object_check('button', 'Tags::HTML::Element::Button');
 	$self->_tags_object_check('input', 'Tags::HTML::Element::Input');
@@ -119,12 +122,23 @@ sub _init {
 		}
 
 		if ($field->isa('Data::HTML::Element::Input')) {
+			$self->{'input'}->init($field);
 			$self->{'_css_input'} = 1;
 		} elsif ($field->isa('Data::HTML::Element::Select')) {
+			$self->{'select'}->init($field);
 			$self->{'_css_select'} = 1;
 		} elsif ($field->isa('Data::HTML::Element::Textarea')) {
+			$self->{'textarea'}->init($field);
 			$self->{'_css_textarea'} = 1;
 		}
+	}
+
+	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
+		$self->{'input'}->init($self->{'submit'});
+		$self->{'_css_input'} = 1;
+	} else {
+		$self->{'button'}->init($self->{'submit'});
+		$self->{'_css_button'} = 1;
 	}
 
 	$self->{'_fields'} = \@fields;
@@ -183,13 +197,10 @@ sub _process {
 		);
 
 		if ($field->isa('Data::HTML::Element::Input')) {
-			$self->{'input'}->init($field);
 			$self->{'input'}->process;
 		} elsif ($field->isa('Data::HTML::Element::Select')) {
-			$self->{'select'}->init($field);
 			$self->{'select'}->process;
 		} else {
-			$self->{'textarea'}->init($field);
 			$self->{'textarea'}->process;
 		}
 	}
@@ -204,10 +215,8 @@ sub _process {
 		['b', 'p'],
 	);
 	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
-		$self->{'input'}->init($self->{'submit'});
 		$self->{'input'}->process;
 	} else {
-		$self->{'button'}->init($self->{'submit'});
 		$self->{'button'}->process;
 	}
 	$self->{'tags'}->put(
@@ -249,22 +258,17 @@ sub _process_css {
 
 	# TODO Different objects and different CSS?
 	my $css_input = 0;
+	if ($self->{'_css_button'}) {
+		$self->{'button'}->process_css;
+	}
 	if ($self->{'_css_input'}) {
-		$css_input = 1;
+		$self->{'input'}->process_css;
 	}
 	if ($self->{'_css_select'}) {
 		$self->{'select'}->process_css;
 	}
 	if ($self->{'_css_textarea'}) {
 		$self->{'textarea'}->process_css;
-	}
-	if ($self->{'submit'}->isa('Data::HTML::Element::Button')) {
-		$self->{'button'}->process_css;
-	} else {
-		$css_input = 1;
-	}
-	if ($css_input) {
-		$self->{'input'}->process_css;
 	}
 
 	return;

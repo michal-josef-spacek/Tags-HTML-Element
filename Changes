@@ -1,4 +1,5 @@
 0.03
+ - Fix CSS processing in Form.
  - Fix doc in Form.
  - Fix module abstract.
  - Rewrite Input to use helpers.

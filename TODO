@@ -12,7 +12,7 @@ TODO
 buttons or other.
 13. Add doc for Utils.
 14. Add tests for Utils.
-15.
+16.
 
 Applied
 =======
@@ -27,3 +27,7 @@ OK [20240107] skim
 
 3. Rewrite Input to _tags_value()
 OK [20240107] skim
+
+15. Form: There is issue with CSS for input. It's fired on second time instead
+of first.
+OK [20240115] skim
