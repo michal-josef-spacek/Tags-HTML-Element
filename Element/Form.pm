@@ -23,26 +23,16 @@ sub new {
 
 	# Create object.
 	my ($object_params_ar, $other_params_ar) = split_params(
-		['background_color', 'button', 'form', 'input', 'select',
-		'submit', 'textarea'], @params);
+		['background_color', 'form', 'submit'], @params);
 	my $self = $class->SUPER::new(@{$other_params_ar});
 
 	# Background color.
 	$self->{'background_color'} = '#f2f2f2';
 
-	# Button object.
-	$self->{'button'} = undef;
-
 	# Form.
 	$self->{'form'} = Data::HTML::Element::Form->new(
 		'css_class' => 'form',
 	);
-
-	# Input object.
-	$self->{'input'} = undef;
-
-	# Select object.
-	$self->{'select'} = undef;
 
 	# Submit.
 	$self->{'submit'} = Data::HTML::Element::Button->new(
@@ -52,9 +42,6 @@ sub new {
 		'data_type' => 'tags',
 		'type' => 'submit',
 	);
-
-	# Textarea object.
-	$self->{'textarea'} = undef;
 
 	# Process params.
 	set_params($self, @{$object_params_ar});
@@ -85,14 +72,6 @@ sub new {
 	if ($self->{'submit'}->type ne 'submit') {
 		err "Parameter 'submit' instance has bad type.";
 	}
-	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
-		$self->{'_css_input'} = 1;
-	}
-
-	$self->_tags_object_check('button', 'Tags::HTML::Element::Button');
-	$self->_tags_object_check('input', 'Tags::HTML::Element::Input');
-	$self->_tags_object_check('select', 'Tags::HTML::Element::Select');
-	$self->_tags_object_check('textarea', 'Tags::HTML::Element::Textarea');
 
 	# Object.
 	return $self;
@@ -102,12 +81,20 @@ sub _cleanup {
 	my $self = shift;
 
 	$self->{'_fields'} = [];
+	$self->{'_tags_fields'} = [];
+	delete $self->{'_tags_submit_field'};
 
 	return;
 }
 
 sub _init {
 	my ($self, @fields) = @_;
+
+	my %common = (
+		'css' => $self->{'css'},
+		'tags' => $self->{'tags'},
+	);
+	$self->{'_tags_fields'} = [];
 
 	# Check fields.
 	foreach my $field (@fields) {
@@ -122,24 +109,26 @@ sub _init {
 		}
 
 		if ($field->isa('Data::HTML::Element::Input')) {
-			$self->{'input'}->init($field);
-			$self->{'_css_input'} = 1;
+			my $tags_input = Tags::HTML::Element::Input->new(%common);
+			$tags_input->init($field);
+			push @{$self->{'_tags_fields'}}, $tags_input;
 		} elsif ($field->isa('Data::HTML::Element::Select')) {
-			$self->{'select'}->init($field);
-			$self->{'_css_select'} = 1;
+			my $tags_select = Tags::HTML::Element::Select->new(%common);
+			$tags_select->init($field);
+			push @{$self->{'_tags_fields'}}, $tags_select;
 		} elsif ($field->isa('Data::HTML::Element::Textarea')) {
-			$self->{'textarea'}->init($field);
-			$self->{'_css_textarea'} = 1;
+			my $tags_textarea = Tags::HTML::Element::Textarea->new(%common);
+			$tags_textarea->init($field);
+			push @{$self->{'_tags_fields'}}, $tags_textarea;
 		}
 	}
 
 	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
-		$self->{'input'}->init($self->{'submit'});
-		$self->{'_css_input'} = 1;
+		$self->{'_tags_submit_field'} = Tags::HTML::Element::Input->new(%common);
 	} else {
-		$self->{'button'}->init($self->{'submit'});
-		$self->{'_css_button'} = 1;
+		$self->{'_tags_submit_field'} = Tags::HTML::Element::Button->new(%common);
 	}
+	$self->{'_tags_submit_field'}->init($self->{'submit'});
 
 	$self->{'_fields'} = \@fields;
 
@@ -178,6 +167,7 @@ sub _process {
 		);
 	}
 
+	my $i = 0;
 	foreach my $field (@{$self->{'_fields'}}) {
 		$self->{'tags'}->put(
 			defined $field->label ? (
@@ -195,14 +185,8 @@ sub _process {
 				['e', 'label'],
 			) : (),
 		);
-
-		if ($field->isa('Data::HTML::Element::Input')) {
-			$self->{'input'}->process;
-		} elsif ($field->isa('Data::HTML::Element::Select')) {
-			$self->{'select'}->process;
-		} else {
-			$self->{'textarea'}->process;
-		}
+		$self->{'_tags_fields'}->[$i]->process;
+		$i++;
 	}
 
 	if (@{$self->{'_fields'}}) {
@@ -214,11 +198,7 @@ sub _process {
 	$self->{'tags'}->put(
 		['b', 'p'],
 	);
-	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
-		$self->{'input'}->process;
-	} else {
-		$self->{'button'}->process;
-	}
+	$self->{'_tags_submit_field'}->process;
 	$self->{'tags'}->put(
 		['e', 'p'],
 
@@ -257,36 +237,16 @@ sub _process_css {
 	);
 
 	# TODO Different objects and different CSS?
-	my $css_input = 0;
-	if ($self->{'_css_button'}) {
-		$self->{'button'}->process_css;
-	}
-	if ($self->{'_css_input'}) {
-		$self->{'input'}->process_css;
-	}
-	if ($self->{'_css_select'}) {
-		$self->{'select'}->process_css;
-	}
-	if ($self->{'_css_textarea'}) {
-		$self->{'textarea'}->process_css;
-	}
+	my $type_hr;
+	foreach my $tags_field (@{$self->{'_tags_fields'}},
+		@{$self->{'_tags_submit_fields'}}) {
 
-	return;
-}
-
-sub _tags_object_check {
-	my ($self, $param, $class) = @_;
-
-	if (! defined $self->{$param}) {
-		$self->{$param} = $class->new(
-			'css' => $self->{'css'},
-			'tags' => $self->{'tags'},
-		);
-	} else {
-		if (! blessed($self->{$param}) || $self->{$param}->isa($class)) {
-			err "Parameter '$param' must be a '$class' instance.";
+		if (! exists $type_hr->{ref $tags_field}) {
+			$type_hr->{ref $tags_field} = 1;
+			$tags_field->process_css;
 		}
 	}
+	$self->{'_tags_submit_field'}->process_css;
 
 	return;
 }
