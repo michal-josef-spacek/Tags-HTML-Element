@@ -11,9 +11,9 @@ Readonly::Array our @EXPORT_OK => qw(tags_boolean tags_value);
 our $VERSION = 0.03;
 
 sub tags_boolean {
-	my ($self, $textarea, $method) = @_;
+	my ($self, $element, $method) = @_;
 
-	if ($textarea->$method) {
+	if ($element->$method) {
 		return (['a', $method, $method]);
 	}
 
@@ -21,13 +21,13 @@ sub tags_boolean {
 }
 
 sub tags_value {
-	my ($self, $textarea, $method, $method_rewrite) = @_;
+	my ($self, $element, $method, $method_rewrite) = @_;
 
-	if (defined $textarea->$method) {
+	if (defined $element->$method) {
 		return ([
 			'a',
 			defined $method_rewrite ? $method_rewrite : $method,
-			$textarea->$method,
+			$element->$method,
 		]);
 	}
 
