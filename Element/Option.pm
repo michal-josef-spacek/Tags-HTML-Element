@@ -7,6 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
+use Tags::HTML::Element::Utils qw(tags_data);
 
 our $VERSION = 0.03;
 
@@ -62,13 +63,7 @@ sub _process {
 		) : (),
 		# TODO Other. https://www.w3schools.com/tags/tag_option.asp
 	);
-	if ($self->{'_option'}->data_type eq 'plain') {
-		$self->{'tags'}->put(
-			['d', $self->{'_option'}->data],
-		);
-	} elsif ($self->{'_option'}->data_type eq 'tags') {
-		$self->{'tags'}->put($self->{'_option'}->data);
-	}
+	tags_data($self, $self->{'_option'});
 	$self->{'tags'}->put(
 		['e', 'option'],
 	);

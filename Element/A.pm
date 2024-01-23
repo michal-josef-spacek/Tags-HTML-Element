@@ -7,6 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
+use Tags::HTML::Element::Utils qw(tags_data);
 
 our $VERSION = 0.03;
 
@@ -47,13 +48,7 @@ sub _process {
 		$self->_tags_value($self->{'_a'}, 'css_class', 'class'),
 		$self->_tags_value($self->{'_a'}, 'url', 'href'),
 	);
-	if ($self->{'_a'}->data_type eq 'plain') {
-		$self->{'tags'}->put(
-			['d', @{$self->{'_a'}->data}],
-		);
-	} elsif ($self->{'_a'}->data_type eq 'tags') {
-		$self->{'tags'}->put(@{$self->{'_a'}->data});
-	}
+	tags_data($self, $self->{'_a'});
 	$self->{'tags'}->put(
 		['e', 'a'],
 	);

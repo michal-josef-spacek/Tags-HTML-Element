@@ -8,6 +8,7 @@ use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
 use Tags::HTML::Element::Option;
+use Tags::HTML::Element::Utils qw(tags_data);
 
 our $VERSION = 0.03;
 
@@ -65,10 +66,7 @@ sub _process {
 		) : (),
 		# TODO Other. https://www.w3schools.com/tags/tag_select.asp
 	);
-	foreach my $option (@{$self->{'_select'}->options}) {
-		$self->{'_option'}->init($option);
-		$self->{'_option'}->process;
-	}
+	tags_data($self, $self->{'_select'});
 	$self->{'tags'}->put(
 		['e', 'select'],
 	);
@@ -99,9 +97,6 @@ sub _process_css {
 		['d', 'box-sizing', 'border-box'],
 		['e'],
 	);
-	if (@{$self->{'_select'}->options}) {
-		$self->{'_option'}->process_css;
-	}
 
 	return;
 }

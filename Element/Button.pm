@@ -7,7 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
-use Tags::HTML::Element::Utils qw(tags_boolean tags_value);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_data tags_value);
 
 our $VERSION = 0.03;
 
@@ -53,13 +53,7 @@ sub _process {
 		tags_boolean($self, $self->{'_button'}, 'autofocus'),
 		tags_boolean($self, $self->{'_button'}, 'disabled'),
 	);
-	if ($self->{'_button'}->data_type eq 'tags') {
-		$self->{'tags'}->put(@{$self->{'_button'}->data});
-	} else {
-		$self->{'tags'}->put(
-			map { (['d', $_]) } @{$self->{'_button'}->data},
-		);
-	}
+	tags_data($self, $self->{'_button'});
 	$self->{'tags'}->put(
 		['e', 'button'],
 	);
