@@ -6,7 +6,7 @@ use warnings;
 
 use Readonly;
 
-Readonly::Array our @EXPORT_OK => qw(tags_boolean tags_value);
+Readonly::Array our @EXPORT_OK => qw(tags_boolean tags_data tags_value);
 
 our $VERSION = 0.03;
 
@@ -18,6 +18,29 @@ sub tags_boolean {
 	}
 
 	return ();
+}
+
+sub tags_data {
+	my ($self, $object) = @_;
+
+	# Plain content.
+	if ($object->data_type eq 'plain') {
+		$self->{'tags'}->put(
+			map { (['d', $_]) } @{$object->data},
+		);
+
+	# Tags content.
+	} elsif ($object->data_type eq 'tags') {
+		$self->{'tags'}->put(@{$object->data});
+
+	# Callback.
+	} else {
+		foreach my $cb (@{$object->data}) {
+			$cb->($self);
+		}
+	}
+
+	return;
 }
 
 sub tags_value {
