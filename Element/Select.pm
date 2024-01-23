@@ -209,9 +209,12 @@ Returns undef.
          'css_class' => 'form-select',
  );
 
+ # Initialize.
+ $obj->init($select);
+
  # Process select.
- $obj->process($select);
- $obj->process_css($select);
+ $obj->process;
+ $obj->process_css;
 
  # Print out.
  print "HTML:\n";
@@ -222,7 +225,7 @@ Returns undef.
 
  # Output:
  # HTML:
- # <select class="form-select" type="text" />
+ # <select class="form-select" />
  #
  # CSS:
  # select.form-select {

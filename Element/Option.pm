@@ -196,12 +196,15 @@ Returns undef.
  # Data object for option.
  my $option = Data::HTML::Element::Option->new(
          'css_class' => 'form-option',
-         'data' => 'Option',
+         'data' => ['Option'],
  );
 
+ # Initialize.
+ $obj->init($option);
+
  # Process option.
- $obj->process($option);
- $obj->process_css($option);
+ $obj->process;
+ $obj->process_css;
 
  # Print out.
  print "HTML:\n";
