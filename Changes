@@ -7,6 +7,7 @@
  - Fix module abstract.
  - Rename variable in Utils.
  - Rewrite Input to use helpers.
+ - Update copyright years.
 
 0.02 2024-01-07T00:39:59+01:00
  - Add Utils module with helpers.
