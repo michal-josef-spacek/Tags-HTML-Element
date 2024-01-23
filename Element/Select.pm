@@ -118,8 +118,11 @@ Tags::HTML::Element::Select - Tags helper for HTML select element.
  use Tags::HTML::Element::Select;
 
  my $obj = Tags::HTML::Element::Select->new(%params);
- $obj->process($select);
- $obj->process_css($select);
+ $obj->cleanup;
+ $obj->init($select);
+ $obj->prepare;
+ $obj->process;
+ $obj->process_css;
 
 =head1 METHODS
 
@@ -145,23 +148,53 @@ Default value is undef.
 
 =back
 
-=head2 C<process>
+=head2 C<cleanup>
 
- $obj->process($select);
+ $obj->cleanup;
 
-Process Tags structure for C<$select> data object to output.
+Process cleanup after page run.
+
+In this case cleanup internal representation of a set by L<init>.
+
+Returns undef.
+
+=head2 C<init>
+
+ $obj->init($select);
+
+Process initialization in page run.
 
 Accepted C<$select> is L<Data::HTML::Element::Select>.
 
 Returns undef.
 
+=head2 C<prepare>
+
+ $obj->prepare;
+
+Process initialization before page run.
+
+Do nothing in this object.
+
+Returns undef.
+
+=head2 C<process>
+
+ $obj->process;
+
+Process L<Tags> structure for HTML select element to output.
+
+Do nothing in case without inicialization by L<init>.
+
+Returns undef.
+
 =head2 C<process_css>
 
- $obj->process_css($select);
+ $obj->process_css;
 
-Process CSS::Struct structure for C<$select> data object to output.
+Process L<CSS::Struct> structure for HTML select element to output.
 
-Accepted C<$select> is L<Data::HTML::Element::Select>.
+Do nothing in case without inicialization by L<init>.
 
 Returns undef.
 
