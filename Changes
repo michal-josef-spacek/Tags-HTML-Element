@@ -3,6 +3,7 @@
  - Another fix of Form processing.
  - Fix CSS processing in Form.
  - Fix doc in Form.
+ - Fix doc in Option.
  - Fix module abstract.
  - Rename variable in Utils.
  - Rewrite Input to use helpers.
