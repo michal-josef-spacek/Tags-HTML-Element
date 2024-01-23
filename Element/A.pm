@@ -7,7 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
-use Tags::HTML::Element::Utils qw(tags_data);
+use Tags::HTML::Element::Utils qw(tags_data tags_value);
 
 our $VERSION = 0.03;
 
@@ -45,8 +45,8 @@ sub _process {
 
 	$self->{'tags'}->put(
 		['b', 'a'],
-		$self->_tags_value($self->{'_a'}, 'css_class', 'class'),
-		$self->_tags_value($self->{'_a'}, 'url', 'href'),
+		tags_value($self, $self->{'_a'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_a'}, 'url', 'href'),
 	);
 	tags_data($self, $self->{'_a'});
 	$self->{'tags'}->put(
@@ -60,20 +60,6 @@ sub _process_css {
 	my $self = shift;
 
 	return;
-}
-
-sub _tags_value {
-	my ($self, $object, $method, $method_rewrite) = @_;
-
-	if (defined $object->$method) {
-		return ([
-			'a',
-			defined $method_rewrite ? $method_rewrite : $method,
-			$object->$method,
-		]);
-	}
-
-	return ();
 }
 
 1;
