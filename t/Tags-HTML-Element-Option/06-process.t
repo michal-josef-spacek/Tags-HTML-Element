@@ -5,7 +5,7 @@ use Data::HTML::Element::Option;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Option;
-use Test::More 'tests' => 6;
+use Test::More 'tests' => 7;
 use Test::NoWarnings;
 use Tags::Output::Raw;
 
@@ -83,6 +83,16 @@ $right_ret = <<'END';
 END
 chomp $right_ret;
 is($ret, $right_ret, "Option (callback).");
+
+# Test.
+$tags = Tags::Output::Raw->new;
+$obj = Tags::HTML::Element::Option->new(
+	'tags' => $tags,
+);
+$obj->process;
+$ret = $tags->flush(1);
+$right_ret = '';
+is($ret, $right_ret, "Without initialization.");
 
 # Test.
 $obj = Tags::HTML::Element::Option->new;
