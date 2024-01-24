@@ -16,6 +16,7 @@ examples/create_and_print_option.pl
 examples/create_and_print_select.pl
 examples/create_and_print_textarea.pl
 examples/default_form.pl
+examples/tags_boolean.pl
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm

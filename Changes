@@ -1,5 +1,6 @@
 0.03
  - Add Option tests.
+ - Add doc for Utils.
  - Another fix of Form processing.
  - Fix CSS processing in Form.
  - Fix doc in Form.
