@@ -105,7 +105,3 @@ xt/Tags-HTML-Element-Utils/01-pod_coverage.t
 xt/Tags-HTML-Element-Utils/02-pod.t
 xt/Tags-HTML-Element/01-pod_coverage.t
 xt/Tags-HTML-Element/02-pod.t
-xt/Tags-HTML-Form-Select/01-pod_coverage.t
-xt/Tags-HTML-Form-Select/02-pod.t
-xt/Tags-HTML-Form/01-pod_coverage.t
-xt/Tags-HTML-Form/02-pod.t
