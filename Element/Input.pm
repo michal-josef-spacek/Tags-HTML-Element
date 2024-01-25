@@ -130,6 +130,7 @@ Tags::HTML::Element::Input - Tags helper for HTML input element.
  my $obj = Tags::HTML::Element::Input->new(%params);
  $obj->cleanup;
  $obj->init($input);
+ $obj->prepare;
  $obj->process;
  $obj->process_css;
 
@@ -172,6 +173,16 @@ Returns undef.
 Initialize object.
 
 Accepted C<$input> is L<Data::HTML::Element::Input>.
+
+Returns undef.
+
+=head2 C<prepare>
+
+ $obj->prepare;
+
+Process initialization before page run.
+
+Do nothing in this object.
 
 Returns undef.
 
