@@ -2,6 +2,7 @@
  - Add Item class.
  - Add Option tests.
  - Add doc for Utils.
+ - Add label for Textarea.
  - Another fix of Form processing.
  - Fix CSS processing in Form.
  - Fix doc in Form.

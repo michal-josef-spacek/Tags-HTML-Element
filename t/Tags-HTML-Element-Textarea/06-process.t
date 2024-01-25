@@ -5,7 +5,7 @@ use Data::HTML::Element::Textarea;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Textarea;
-use Test::More 'tests' => 5;
+use Test::More 'tests' => 6;
 use Test::NoWarnings;
 use Tags::Output::Structure;
 
@@ -87,6 +87,53 @@ is_deeply(
 		['e', 'textarea'],
 	],
 	'Input HTML code (textarea with attributes and value).',
+);
+
+# Test.
+$tags = Tags::Output::Structure->new;
+$obj = Tags::HTML::Element::Textarea->new(
+	'tags' => $tags,
+);
+$textarea = Data::HTML::Element::Textarea->new(
+	'cols' => 2,
+	'css_class' => 'foo',
+	'form' => 'form-id',
+	'id' => 'textarea-id',
+	'label' => 'Text Area',
+	'name' => 'textarea-name',
+	'placeholder' => 'Fill value',
+	'required' => 1,
+	'rows' => 5,
+	'value' => 'textarea value',
+);
+$obj->init($textarea);
+$obj->process;
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'label'],
+		['a', 'for', 'textarea-id'],
+		['d', 'Text Area'],
+		['b', 'span'],
+		['a', 'class', 'foo-required'],
+		['d', '*'],
+		['e', 'span'],
+		['e', 'label'],
+
+		['b', 'textarea'],
+		['a', 'class', 'foo'],
+		['a', 'id', 'textarea-id'],
+		['a', 'name', 'textarea-name'],
+		['a', 'placeholder', 'Fill value'],
+		['a', 'required', 'required'],
+		['a', 'cols', 2],
+		['a', 'rows', 5],
+		['a', 'form', 'form-id'],
+		['d', 'textarea value'],
+		['e', 'textarea'],
+	],
+	'Input HTML code (textarea with attributes, value and label).',
 );
 
 # Test.
