@@ -7,25 +7,28 @@ use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Textarea;
 use Test::More 'tests' => 5;
 use Test::NoWarnings;
-use Tags::Output::Raw;
+use Tags::Output::Structure;
 
 # Test.
-my $tags = Tags::Output::Raw->new;
+my $tags = Tags::Output::Structure->new;
 my $obj = Tags::HTML::Element::Textarea->new(
 	'tags' => $tags,
 );
 my $textarea = Data::HTML::Element::Textarea->new;
 $obj->init($textarea);
 $obj->process;
-my $ret = $tags->flush(1);
-my $right_ret = <<'END';
-<textarea></textarea>
-END
-chomp $right_ret;
-is($ret, $right_ret, "Textarea defaults.");
+my $ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'textarea'],
+		['e', 'textarea'],
+	],
+	'Input HTML code (textarea).',
+);
 
 # Test.
-$tags = Tags::Output::Raw->new;
+$tags = Tags::Output::Structure->new;
 $obj = Tags::HTML::Element::Textarea->new(
 	'tags' => $tags,
 );
@@ -37,15 +40,22 @@ $textarea = Data::HTML::Element::Textarea->new(
 );
 $obj->init($textarea);
 $obj->process;
-$ret = $tags->flush(1);
-$right_ret = <<'END';
-<textarea autofocus="autofocus" readonly="readonly" disabled="disabled" required="required"></textarea>
-END
-chomp $right_ret;
-is($ret, $right_ret, "Textarea with boolean values.");
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'textarea'],
+		['a', 'autofocus', 'autofocus'],
+		['a', 'readonly', 'readonly'],
+		['a', 'disabled', 'disabled'],
+		['a', 'required', 'required'],
+		['e', 'textarea'],
+	],
+	'Input HTML code (textarea with boolean values).',
+);
 
 # Test.
-$tags = Tags::Output::Raw->new;
+$tags = Tags::Output::Structure->new;
 $obj = Tags::HTML::Element::Textarea->new(
 	'tags' => $tags,
 );
@@ -61,12 +71,23 @@ $textarea = Data::HTML::Element::Textarea->new(
 );
 $obj->init($textarea);
 $obj->process;
-$ret = $tags->flush(1);
-$right_ret = <<'END';
-<textarea class="foo" id="textarea-id" name="textarea-name" placeholder="Fill value" cols="2" rows="5" form="form-id">textarea value</textarea>
-END
-chomp $right_ret;
-is($ret, $right_ret, "Textarea with attributes and value.");
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'textarea'],
+		['a', 'class', 'foo'],
+		['a', 'id', 'textarea-id'],
+		['a', 'name', 'textarea-name'],
+		['a', 'placeholder', 'Fill value'],
+		['a', 'cols', 2],
+		['a', 'rows', 5],
+		['a', 'form', 'form-id'],
+		['d', 'textarea value'],
+		['e', 'textarea'],
+	],
+	'Input HTML code (textarea with attributes and value).',
+);
 
 # Test.
 $obj = Tags::HTML::Element::Textarea->new;
