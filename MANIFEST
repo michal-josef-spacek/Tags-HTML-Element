@@ -4,6 +4,7 @@ Element.pm
 Element/A.pm
 Element/Button.pm
 Element/Form.pm
+Element/Form/Items.pm
 Element/Input.pm
 Element/Item.pm
 Element/Option.pm
@@ -17,6 +18,7 @@ examples/create_and_print_option.pl
 examples/create_and_print_select.pl
 examples/create_and_print_textarea.pl
 examples/default_form.pl
+examples/form_items.pl
 examples/tags_boolean.pl
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
@@ -49,6 +51,8 @@ t/Tags-HTML-Element-Button/04-cleanup.t
 t/Tags-HTML-Element-Button/05-init.t
 t/Tags-HTML-Element-Button/06-process.t
 t/Tags-HTML-Element-Button/07-process_css.t
+t/Tags-HTML-Element-Form-Items/01-use.t
+t/Tags-HTML-Element-Form-Items/02-version.t
 t/Tags-HTML-Element-Form/01-use.t
 t/Tags-HTML-Element-Form/02-version.t
 t/Tags-HTML-Element-Form/03-new.t
@@ -98,6 +102,8 @@ xt/Tags-HTML-Element-A/01-pod_coverage.t
 xt/Tags-HTML-Element-A/02-pod.t
 xt/Tags-HTML-Element-Button/01-pod_coverage.t
 xt/Tags-HTML-Element-Button/02-pod.t
+xt/Tags-HTML-Element-Form-Items/01-pod_coverage.t
+xt/Tags-HTML-Element-Form-Items/02-pod.t
 xt/Tags-HTML-Element-Form/01-pod_coverage.t
 xt/Tags-HTML-Element-Form/02-pod.t
 xt/Tags-HTML-Element-Input/01-pod_coverage.t
