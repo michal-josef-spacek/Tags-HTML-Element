@@ -46,6 +46,8 @@ sub _process {
 	$self->{'tags'}->put(
 		['b', 'a'],
 		tags_value($self, $self->{'_a'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_a'}, 'id'),
+		tags_value($self, $self->{'_a'}, 'target'),
 		tags_value($self, $self->{'_a'}, 'url', 'href'),
 	);
 	tags_data($self, $self->{'_a'});
