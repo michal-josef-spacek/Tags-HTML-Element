@@ -6,6 +6,7 @@
  - Fix doc in Form.
  - Fix doc in Option.
  - Fix module abstract.
+ - Implement Utils::tags_label().
  - Rename variable in Utils.
  - Rewrite Input to use helpers.
  - Update copyright years.

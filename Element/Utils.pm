@@ -6,7 +6,7 @@ use warnings;
 
 use Readonly;
 
-Readonly::Array our @EXPORT_OK => qw(tags_boolean tags_data tags_value);
+Readonly::Array our @EXPORT_OK => qw(tags_boolean tags_data tags_label tags_value);
 
 our $VERSION = 0.03;
 
@@ -43,6 +43,36 @@ sub tags_data {
 	return;
 }
 
+sub tags_label {
+	my ($self, $object) = @_;
+
+	# CSS for required span.
+	my $css_required = '';
+	if (defined $object->css_class) {
+		$css_required .= $object->css_class.'-';
+	}
+	$css_required .= 'required';
+
+	$self->{'tags'}->put(
+		defined $object->label ? (
+			['b', 'label'],
+			$object->id ? (
+				['a', 'for', $object->id],
+			) : (),
+			['d', $object->label],
+			$object->required ? (
+				['b', 'span'],
+				['a', 'class', $css_required],
+				['d', '*'],
+				['e', 'span'],
+			) : (),
+			['e', 'label'],
+		) : (),
+	);
+
+	return;
+}
+
 sub tags_value {
 	my ($self, $element, $method, $method_rewrite) = @_;
 
@@ -71,10 +101,11 @@ Tags::HTML::Element::Utils - Tags::HTML::Element utilities.
 
 =head1 SYNOPSIS
 
- use Tags::HTML::Element::Utils qw(tags_boolean tags_data tags_value);
+ use Tags::HTML::Element::Utils qw(tags_boolean tags_data tags_label tags_value);
 
  tags_boolean($self, $element, $method);
  tags_data($self, $object);
+ tags_label($self, $object);
  tags_value($self, $element, $method, $method_rewrite);
 
 =head1 DESCRIPTION
@@ -118,6 +149,14 @@ method.
 Call C<$object-E<gt>data> callback.
 
 =back
+
+=head2 C<tags_label>
+
+ tags_label($self, $object);
+
+Process L<Tags> structure for element label, which is before form item element.
+
+Returns undef.
 
 =head2 C<tags_value>
 

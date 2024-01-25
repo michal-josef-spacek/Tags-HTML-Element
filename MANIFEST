@@ -86,7 +86,9 @@ t/Tags-HTML-Element-Utils/01-use.t
 t/Tags-HTML-Element-Utils/02-version.t
 t/Tags-HTML-Element-Utils/03-tags_boolean.t
 t/Tags-HTML-Element-Utils/04-tags_data.t
+t/Tags-HTML-Element-Utils/05-tags_label.t
 t/Tags-HTML-Element-Utils/05-tags_value.t
+t/Tags-HTML-Element-Utils/06-tags_value.t
 t/Tags-HTML-Element/01-use.t
 t/Tags-HTML-Element/02-version.t
 xt/Tags-HTML-Element-A/01-pod_coverage.t
