@@ -1,4 +1,5 @@
 0.03
+ - Add Item class.
  - Add Option tests.
  - Add doc for Utils.
  - Another fix of Form processing.

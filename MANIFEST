@@ -5,6 +5,7 @@ Element/A.pm
 Element/Button.pm
 Element/Form.pm
 Element/Input.pm
+Element/Item.pm
 Element/Option.pm
 Element/Select.pm
 Element/Textarea.pm
@@ -61,6 +62,8 @@ t/Tags-HTML-Element-Input/03-new.t
 t/Tags-HTML-Element-Input/04-init.t
 t/Tags-HTML-Element-Input/05-process.t
 t/Tags-HTML-Element-Input/06-process_css.t
+t/Tags-HTML-Element-Item/01-use.t
+t/Tags-HTML-Element-Item/02-version.t
 t/Tags-HTML-Element-Option/01-use.t
 t/Tags-HTML-Element-Option/02-version.t
 t/Tags-HTML-Element-Option/03-new.t
@@ -99,6 +102,8 @@ xt/Tags-HTML-Element-Form/01-pod_coverage.t
 xt/Tags-HTML-Element-Form/02-pod.t
 xt/Tags-HTML-Element-Input/01-pod_coverage.t
 xt/Tags-HTML-Element-Input/02-pod.t
+xt/Tags-HTML-Element-Item/01-pod_coverage.t
+xt/Tags-HTML-Element-Item/02-pod.t
 xt/Tags-HTML-Element-Option/01-pod_coverage.t
 xt/Tags-HTML-Element-Option/02-pod.t
 xt/Tags-HTML-Element-Select/01-pod_coverage.t
