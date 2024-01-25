@@ -54,6 +54,10 @@ is_deeply(
 		['d', 'border-radius', '4px'],
 		['d', 'box-sizing', 'border-box'],
 		['e'],
+
+		['s', '.required'],
+		['d', 'color', 'red'],
+		['e'],
 	],
 	'Input CSS code (without css class).',
 );
@@ -103,6 +107,10 @@ is_deeply(
 		['d', 'border', '1px solid #ccc'],
 		['d', 'border-radius', '4px'],
 		['d', 'box-sizing', 'border-box'],
+		['e'],
+
+		['s', '.form-input-required'],
+		['d', 'color', 'red'],
 		['e'],
 	],
 	'Input CSS code (with css class).',

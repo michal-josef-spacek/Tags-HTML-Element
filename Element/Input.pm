@@ -7,7 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
-use Tags::HTML::Element::Utils qw(tags_boolean tags_value);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_label tags_value);
 
 our $VERSION = 0.03;
 
@@ -44,6 +44,7 @@ sub _process {
 	}
 
 	$self->{'tags'}->put(
+		tags_label($self, $self->{'_input'}),
 		['b', 'input'],
 		tags_boolean($self, $self->{'_input'}, 'autofocus'),
 		tags_value($self, $self->{'_input'}, 'css_class', 'class'),
@@ -71,9 +72,12 @@ sub _process_css {
 	}
 
 	my $css_class = '';
+	my $css_required = '.';
 	if (defined $self->{'_input'}->css_class) {
 		$css_class = '.'.$self->{'_input'}->css_class;
+		$css_required .= $self->{'_input'}->css_class.'-';
 	}
+	$css_required .= 'required';
 
 	$self->{'css'}->put(
 		['s', 'input'.$css_class.'[type=submit]:hover'],
@@ -105,6 +109,10 @@ sub _process_css {
 		['d', 'border', '1px solid #ccc'],
 		['d', 'border-radius', '4px'],
 		['d', 'box-sizing', 'border-box'],
+		['e'],
+
+		['s', $css_required],
+		['d', 'color', 'red'],
 		['e'],
 	);
 
