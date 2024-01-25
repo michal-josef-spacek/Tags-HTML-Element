@@ -96,13 +96,3 @@ is_deeply(
 	],
 	'Get Tags code for callback.',
 );
-
-# Test.
-#$obj = Test::MockObject->new;
-#$obj->set_false('bad');
-#@ret = tags_boolean({}, $obj, 'bad');
-#is_deeply(
-#	\@ret,
-#	[],
-#	'No method, no Tags code.',
-#);
