@@ -13,7 +13,6 @@ buttons or other.
 16. Move Element::Form to Form. And add Element::Form in same way as other.
 Maybe simplify, because inner content is similar as e.g. option.
 17. Check doc of all elements (init, cleanup, etc)
-18. Item: Tests.
 19. Improve required CSS? There is required="required".
 20.
 
@@ -40,3 +39,6 @@ OK [20240124] skim
 
 14. Add tests for Utils.
 OK [20240124] skim
+
+18. Item: Tests.
+NONE [20240126] skim
