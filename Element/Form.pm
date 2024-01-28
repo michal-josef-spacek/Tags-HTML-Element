@@ -5,15 +5,9 @@ use strict;
 use warnings;
 
 use Class::Utils qw(set_params split_params);
-use Data::HTML::Element::Button;
-use Data::HTML::Element::Form;
 use Error::Pure qw(err);
-use List::Util qw(first);
 use Scalar::Util qw(blessed);
-use Tags::HTML::Element::Button;
-use Tags::HTML::Element::Input;
-use Tags::HTML::Element::Select;
-use Tags::HTML::Element::Textarea;
+use Tags::HTML::Element::Utils qw(tags_data tags_value);
 
 our $VERSION = 0.03;
 
@@ -23,55 +17,14 @@ sub new {
 
 	# Create object.
 	my ($object_params_ar, $other_params_ar) = split_params(
-		['background_color', 'form', 'submit'], @params);
+		['background_color'], @params);
 	my $self = $class->SUPER::new(@{$other_params_ar});
 
 	# Background color.
 	$self->{'background_color'} = '#f2f2f2';
 
-	# Form.
-	$self->{'form'} = Data::HTML::Element::Form->new(
-		'css_class' => 'form',
-	);
-
-	# Submit.
-	$self->{'submit'} = Data::HTML::Element::Button->new(
-		'data' => [
-			['d', 'Save'],
-		],
-		'data_type' => 'tags',
-		'type' => 'submit',
-	);
-
 	# Process params.
 	set_params($self, @{$object_params_ar});
-
-	# Check form.
-	if (! defined $self->{'form'}) {
-		err "Parameter 'form' is required.";
-	}
-	if (! blessed($self->{'form'})
-		|| ! $self->{'form'}->isa('Data::HTML::Element::Form')) {
-
-		err "Parameter 'form' must be a 'Data::HTML::Element::Form' instance.";
-	}
-	if (! defined $self->{'form'}->{'css_class'}) {
-		err "Parameter 'form' must define 'css_class' parameter.";
-	}
-
-	# Check submit.
-	if (! defined $self->{'submit'}) {
-		err "Parameter 'submit' is required.";
-	}
-	if (! blessed($self->{'submit'})
-		|| (! $self->{'submit'}->isa('Data::HTML::Element::Input')
-		&& ! $self->{'submit'}->isa('Data::HTML::Element::Button'))) {
-
-		err "Parameter 'submit' must be a 'Data::HTML::Element::Input' instance.";
-	}
-	if ($self->{'submit'}->type ne 'submit') {
-		err "Parameter 'submit' instance has bad type.";
-	}
 
 	# Object.
 	return $self;
@@ -80,57 +33,23 @@ sub new {
 sub _cleanup {
 	my $self = shift;
 
-	$self->{'_fields'} = [];
-	$self->{'_tags_fields'} = [];
-	delete $self->{'_tags_submit_field'};
+	delete $self->{'_form'};
 
 	return;
 }
 
 sub _init {
-	my ($self, @fields) = @_;
+	my ($self, $form) = @_;
 
-	my %common = (
-		'css' => $self->{'css'},
-		'tags' => $self->{'tags'},
-	);
-	$self->{'_tags_fields'} = [];
+	# Check form.
+	if (! defined $form
+		|| ! blessed($form)
+		|| ! $form->isa('Data::HTML::Element::Form')) {
 
-	# Check fields.
-	foreach my $field (@fields) {
-		if (! defined $field
-			|| ! blessed($field)
-			|| (! $field->isa('Data::HTML::Element::Input')
-			&& ! $field->isa('Data::HTML::Element::Select')
-			&& ! $field->isa('Data::HTML::Element::Textarea'))) {
-
-			err "Form item must be a 'Data::HTML::Element::Input', ".
-				"'Data::HTML::Element::Textarea' or 'Data::HTML::Element::Select' instance.";
-		}
-
-		if ($field->isa('Data::HTML::Element::Input')) {
-			my $tags_input = Tags::HTML::Element::Input->new(%common);
-			$tags_input->init($field);
-			push @{$self->{'_tags_fields'}}, $tags_input;
-		} elsif ($field->isa('Data::HTML::Element::Select')) {
-			my $tags_select = Tags::HTML::Element::Select->new(%common);
-			$tags_select->init($field);
-			push @{$self->{'_tags_fields'}}, $tags_select;
-		} elsif ($field->isa('Data::HTML::Element::Textarea')) {
-			my $tags_textarea = Tags::HTML::Element::Textarea->new(%common);
-			$tags_textarea->init($field);
-			push @{$self->{'_tags_fields'}}, $tags_textarea;
-		}
+		err "Form object must be a 'Data::HTML::Element::Form' instance.";
 	}
 
-	if ($self->{'submit'}->isa('Data::HTML::Element::Input')) {
-		$self->{'_tags_submit_field'} = Tags::HTML::Element::Input->new(%common);
-	} else {
-		$self->{'_tags_submit_field'} = Tags::HTML::Element::Button->new(%common);
-	}
-	$self->{'_tags_submit_field'}->init($self->{'submit'});
-
-	$self->{'_fields'} = \@fields;
+	$self->{'_form'} = $form;
 
 	return;
 }
@@ -139,70 +58,25 @@ sub _init {
 sub _process {
 	my $self = shift;
 
-	if (! exists $self->{'_fields'}) {
+	if (! exists $self->{'_form'}) {
 		return;
 	}
 
 	$self->{'tags'}->put(
 		['b', 'form'],
-		defined $self->{'form'}->css_class ? (
-			['a', 'class', $self->{'form'}->css_class],
-		) : (),
-		defined $self->{'form'}->action ? (
-			['a', 'action', $self->{'form'}->action],
-		) : (),
-		['a', 'method', $self->{'form'}->method],
-
-		defined $self->{'form'}->{'label'} ? (
+		tags_value($self, $self->{'_form'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_form'}, 'action'),
+		tags_value($self, $self->{'_form'}, 'method'),
+		defined $self->{'_form'}->{'label'} ? (
 			['b', 'fieldset'],
 			['b', 'legend'],
-			['d', $self->{'form'}->{'label'}],
+			['d', $self->{'_form'}->{'label'}],
 			['e', 'legend'],
 		) : (),
 	);
-
-	if (@{$self->{'_fields'}}) {
-		$self->{'tags'}->put(
-			['b', 'p'],
-		);
-	}
-
-	my $i = 0;
-	foreach my $field (@{$self->{'_fields'}}) {
-		$self->{'tags'}->put(
-			defined $field->label ? (
-				['b', 'label'],
-				$field->id ? (
-					['a', 'for', $field->id],
-				) : (),
-				['d', $field->label],
-				$field->required ? (
-					['b', 'span'],
-					['a', 'class', $self->{'form'}->css_class.'-required'],
-					['d', '*'],
-					['e', 'span'],
-				) : (),
-				['e', 'label'],
-			) : (),
-		);
-		$self->{'_tags_fields'}->[$i]->process;
-		$i++;
-	}
-
-	if (@{$self->{'_fields'}}) {
-		$self->{'tags'}->put(
-			['e', 'p'],
-		);
-	}
-
+	tags_data($self, $self->{'_form'});
 	$self->{'tags'}->put(
-		['b', 'p'],
-	);
-	$self->{'_tags_submit_field'}->process;
-	$self->{'tags'}->put(
-		['e', 'p'],
-
-		defined $self->{'form'}->{'label'} ? (
+		defined $self->{'_form'}->{'label'} ? (
 			['e', 'fieldset'],
 		) : (),
 		['e', 'form'],
@@ -214,39 +88,42 @@ sub _process {
 sub _process_css {
 	my $self = shift;
 
+	if (! exists $self->{'_form'}) {
+		return;
+	}
+
+	my $css_class = '';
+	if (defined $self->{'_form'}->css_class) {
+		$css_class = '.'.$self->{'_form'}->css_class;
+	}
+	my $css_legend = $css_class;
+	if ($css_legend) {
+		$css_legend .= ' ';
+	}
+	$css_legend .= 'legend';
+	my $css_fieldset = $css_class;
+	if ($css_fieldset) {
+		$css_fieldset .= ' ';
+	}
+	$css_fieldset .= 'fieldset';
+
 	$self->{'css'}->put(
-		['s', '.'.$self->{'form'}->css_class],
+		['s', $css_class],
 		['d', 'border-radius', '5px'],
 		['d', 'background-color', $self->{'background_color'}],
 		['d', 'padding', '20px'],
 		['e'],
 
-		['s', '.'.$self->{'form'}->css_class.' fieldset'],
+		['s', $css_fieldset],
 		['d', 'padding', '20px'],
 		['d', 'border-radius', '15px'],
 		['e'],
 
-		['s', '.'.$self->{'form'}->css_class.' legend'],
+		['s', $css_legend],
 		['d', 'padding-left', '10px'],
 		['d', 'padding-right', '10px'],
 		['e'],
-
-		['s', '.'.$self->{'form'}->css_class.'-required'],
-		['d', 'color', 'red'],
-		['e'],
 	);
-
-	# TODO Different objects and different CSS?
-	my $type_hr;
-	foreach my $tags_field (@{$self->{'_tags_fields'}},
-		@{$self->{'_tags_submit_fields'}}) {
-
-		if (! exists $type_hr->{ref $tags_field}) {
-			$type_hr->{ref $tags_field} = 1;
-			$tags_field->process_css;
-		}
-	}
-	$self->{'_tags_submit_field'}->process_css;
 
 	return;
 }
@@ -269,7 +146,8 @@ Tags::HTML::Element::Form - Tags helper for HTML form element.
 
  my $obj = Tags::HTML::Element::Form->new(%params);
  $obj->cleanup;
- $obj->init(@fields);
+ $obj->init($form);
+ $obj->prepare;
  $obj->process;
  $obj->process_css;
 
@@ -295,75 +173,31 @@ Default value is '#f2f2f2'.
 
 Default value is undef.
 
-=item * C<button>
-
-L<Tags::HTML::Element::Button> instance to process button.
-
-Default value is L<Tags::HTML::Element::Button> object with 'tags' and 'css' parameter
-inherited with main object.
-
-=item * C<form>
-
-Data object for form.
-
-Could be a 'L<Data::HTML::Element::Form>' instance.
-
-Default value is instance with 'form' css class.
-
-=item * C<input>
-
-L<Tags::HTML::Element::Input> instance to process inputs.
-
-Default value is L<Tags::HTML::Element::Input> object with 'tags' and 'css' parameter
-inherited with main object.
-
-=item * C<select>
-
-L<Tags::HTML::Element::Select> instance to process select elements.
-
-Default value is L<Tags::HTML::Element::Select> object with 'tags' and 'css' parameter
-inherited with main object.
-
-=item * C<submit>
-
-Data object for submit.
-
-Could be a 'L<Data::HTML::Element::Form::Input>' or 'L<Data::HTML::Element::Button>' instance.
-
-Default value is instance with 'Save' submit value.
-
 =item * C<tags>
 
 'L<Tags::Output>' object for L</process> processing.
 
 Default value is undef.
 
-=item * C<textarea>
-
-L<Tags::HTML::Element::Textarea> instance to process textarea elements.
-
-Default value is L<Tags::HTML::Element::Textarea> object with 'tags' and 'css' parameter
-inherited with main object.
-
 =back
 
 =head2 C<init>
 
- $obj->init(@fields);
+ $obj->init($form);
 
-Initialize L<Tags> structure for fields defined in C<@fields>.
+Initialize L<Tags> structure for fields defined in C<$form>.
 
-Accepted items in C<@fields> are objects:
+Accepted C<$form> is L<Data::HTML::Element::Form>.
 
-=over
+Returns undef.
 
-=item * L<Data::HTML::Element::Input>
+=head2 C<prepare>
 
-=item * L<Data::HTML::Element::Select>
+ $obj->prepare;
 
-=item * L<Data::HTML::Element::Textarea>
+Process initialization before page run.
 
-=back
+Do nothing in this object.
 
 Returns undef.
 
@@ -391,21 +225,14 @@ Returns undef.
          From Tags::HTML::new():
                  Parameter 'css' must be a 'CSS::Struct::Output::*' class.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
-         Parameter 'button' must be a 'Tags::HTML::Element::Button' instance.
-         Parameter 'form' is required.
-         Parameter 'form' must be a 'Data::HTML::Element::Form' instance.
-         Parameter 'form' must define 'css_class' parameter.
-         Parameter 'input' must be a 'Tags::HTML::Element::Input' instance.
-         Parameter 'select' must be a 'Tags::HTML::Element::Select' instance.
-         Parameter 'submit' instance has bad type.
-         Parameter 'submit' is required.
-         Parameter 'submit' must be a 'Data::HTML::Element::Input' instance.
-         Parameter 'textarea' must be a 'Tags::HTML::Element::Textarea' instance.
+
+ init():
+         From Tags::HTML::init():
+                 Form object must be a 'Data::HTML::Element::Form' instance.
 
  process():
          From Tags::HTML::process():
                  Parameter 'tags' isn't defined.
-         Form item must be a 'Data::HTML::Element::Input' instance.
 
  process_css():
          From Tags::HTML::process_css():
@@ -413,25 +240,41 @@ Returns undef.
 
 =head1 EXAMPLE
 
-=for comment filename=default_form.pl
+=for comment filename=form_with_submit.pl
 
  use strict;
  use warnings;
 
  use CSS::Struct::Output::Indent;
+ use Data::HTML::Element::Form;
  use Tags::HTML::Element::Form;
  use Tags::Output::Indent;
 
  # Object.
  my $css = CSS::Struct::Output::Indent->new;
  my $tags = Tags::Output::Indent->new;
- my $obj = Tags::HTML::Element::Form->new(
+ my %p = (
          'css' => $css,
          'tags' => $tags,
  );
+ my $obj = Tags::HTML::Element::Form->new(%p);
+
+ my $form = Data::HTML::Element::Form->new(
+         'css_class' => 'form',
+         'data' => [
+                 ['b', 'p'],
+                 ['b', 'button'],
+                 ['a', 'type', 'submit'],
+                 ['d', 'Save'],
+                 ['e', 'button'],
+                 ['e', 'p'],
+         ],
+         'data_type' => 'tags',
+         'label' => 'Form for submit',
+ );
 
  # Initialize.
- $obj->init;
+ $obj->init($form);
 
  # Process form.
  $obj->process;
@@ -443,12 +286,17 @@ Returns undef.
  print $css->flush;
 
  # Output:
- # <form class="form" method="GET">
- #   <p>
- #     <button type="submit">
- #       Save
- #     </button>
- #   </p>
+ # <form class="form" method="get">
+ #   <fieldset>
+ #     <legend>
+ #       Form for submit
+ #     </legend>
+ #     <p>
+ #       <button type="submit">
+ #         Save
+ #       </button>
+ #     </p>
+ #   </fieldset>
  # </form>
  # 
  # .form {
@@ -464,34 +312,14 @@ Returns undef.
  #         padding-left: 10px;
  #         padding-right: 10px;
  # }
- # .form-required {
- #         color: red;
- # }
- # button {
- #         width: 100%;
- #         background-color: #4CAF50;
- #         color: white;
- #         padding: 14px 20px;
- #         margin: 8px 0;
- #         border: none;
- #         border-radius: 4px;
- #         cursor: pointer;
- # }
- # button:hover {
- #         background-color: #45a049;
- # }
 
 =head1 DEPENDENCIES
 
 L<Class::Utils>,
-L<Data::HTML::Element::Button>,
-L<Data::HTML::Element::Form>,
 L<Error::Pure>,
-L<List::Util>,
 L<Scalar::Util>,
 L<Tags::HTML>,
-L<Tags::HTML::Element::Input>,
-L<Tags::HTML::Element::Select>.
+L<Tags::HTML::Element::Utils>.
 
 =head1 REPOSITORY
 

@@ -11,6 +11,7 @@
  - Improve A element output.
  - Rename variable in Utils.
  - Rewrite Input to use helpers.
+ - Simplify Form in same way as other objects.
  - Update copyright years.
 
 0.02 2024-01-07T00:39:59+01:00

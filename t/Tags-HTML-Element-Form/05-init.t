@@ -12,6 +12,6 @@ my $obj = Tags::HTML::Element::Form->new;
 eval {
 	$obj->init('bad');
 };
-is($EVAL_ERROR, "Form item must be a 'Data::HTML::Element::Input', 'Data::HTML::Element::Textarea' or 'Data::HTML::Element::Select' instance.\n",
-	"Form item must be a 'Data::HTML::Element::Input', 'Data::HTML::Element::Textarea' or 'Data::HTML::Element::Select' instance.");
+is($EVAL_ERROR, "Form object must be a 'Data::HTML::Element::Form' instance.\n",
+	"Form object must be a 'Data::HTML::Element::Form' instance.");
 clean();

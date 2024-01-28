@@ -4,19 +4,35 @@ use strict;
 use warnings;
 
 use CSS::Struct::Output::Indent;
+use Data::HTML::Element::Form;
 use Tags::HTML::Element::Form;
 use Tags::Output::Indent;
 
 # Object.
 my $css = CSS::Struct::Output::Indent->new;
 my $tags = Tags::Output::Indent->new;
-my $obj = Tags::HTML::Element::Form->new(
+my %p = (
         'css' => $css,
         'tags' => $tags,
 );
+my $obj = Tags::HTML::Element::Form->new(%p);
+
+my $form = Data::HTML::Element::Form->new(
+        'css_class' => 'form',
+        'data' => [
+                ['b', 'p'],
+                ['b', 'button'],
+                ['a', 'type', 'submit'],
+                ['d', 'Save'],
+                ['e', 'button'],
+                ['e', 'p'],
+        ],
+        'data_type' => 'tags',
+        'label' => 'Form for submit',
+);
 
 # Initialize.
-$obj->init;
+$obj->init($form);
 
 # Process form.
 $obj->process;
@@ -28,12 +44,17 @@ print "\n\n";
 print $css->flush;
 
 # Output:
-# <form class="form" method="GET">
-#   <p>
-#     <button type="submit">
-#       Save
-#     </button>
-#   </p>
+# <form class="form" method="get">
+#   <fieldset>
+#     <legend>
+#       Form for submit
+#     </legend>
+#     <p>
+#       <button type="submit">
+#         Save
+#       </button>
+#     </p>
+#   </fieldset>
 # </form>
 # 
 # .form {
@@ -48,20 +69,4 @@ print $css->flush;
 # .form legend {
 #         padding-left: 10px;
 #         padding-right: 10px;
-# }
-# .form-required {
-#         color: red;
-# }
-# button {
-#         width: 100%;
-#         background-color: #4CAF50;
-#         color: white;
-#         padding: 14px 20px;
-#         margin: 8px 0;
-#         border: none;
-#         border-radius: 4px;
-#         cursor: pointer;
-# }
-# button:hover {
-#         background-color: #45a049;
 # }
