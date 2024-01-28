@@ -10,6 +10,7 @@ use Test::NoWarnings;
 # Test.
 my $tags = Tags::Output::Structure->new;
 my $obj = Test::MockObject->new;
+$obj->mock('css_class', sub { return; });
 $obj->mock('label', sub { return 'Label'; });
 $obj->set_false('required');
 $obj->mock('id', sub { return; });
@@ -31,6 +32,7 @@ is_deeply(
 # Test.
 $tags = Tags::Output::Structure->new;
 $obj = Test::MockObject->new;
+$obj->mock('css_class', sub { return; });
 $obj->mock('label', sub { return 'Label'; });
 $obj->set_false('required');
 $obj->mock('id', sub { return 2; });
@@ -53,10 +55,10 @@ is_deeply(
 # Test.
 $tags = Tags::Output::Structure->new;
 $obj = Test::MockObject->new;
+$obj->mock('css_class', sub { return 'input'; });
+$obj->mock('id', sub { return 2; });
 $obj->mock('label', sub { return 'Label'; });
 $obj->set_true('required');
-$obj->mock('id', sub { return 2; });
-$obj->mock('css_class', sub { return 'input'; });
 $ret = tags_label({
 	'tags' => $tags,
 }, $obj);
