@@ -50,6 +50,7 @@ sub _process {
 		tags_value($self, $self->{'_input'}, 'css_class', 'class'),
 		tags_value($self, $self->{'_input'}, 'type'),
 		tags_value($self, $self->{'_input'}, 'id'),
+		tags_value($self, $self->{'_input'}, 'name'),
 		tags_value($self, $self->{'_input'}, 'value'),
 		tags_boolean($self, $self->{'_input'}, 'checked'),
 		tags_value($self, $self->{'_input'}, 'placeholder'),
