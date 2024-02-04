@@ -99,8 +99,6 @@ xt/Tags-HTML-Element-Form/01-pod_coverage.t
 xt/Tags-HTML-Element-Form/02-pod.t
 xt/Tags-HTML-Element-Input/01-pod_coverage.t
 xt/Tags-HTML-Element-Input/02-pod.t
-xt/Tags-HTML-Element-Item/01-pod_coverage.t
-xt/Tags-HTML-Element-Item/02-pod.t
 xt/Tags-HTML-Element-Option/01-pod_coverage.t
 xt/Tags-HTML-Element-Option/02-pod.t
 xt/Tags-HTML-Element-Select/01-pod_coverage.t
