@@ -8,7 +8,7 @@ use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
 use Tags::HTML::Element::Option;
-use Tags::HTML::Element::Utils qw(tags_data);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_data tags_value);
 
 our $VERSION = 0.05;
 
@@ -51,19 +51,11 @@ sub _process {
 
 	$self->{'tags'}->put(
 		['b', 'select'],
-		defined $self->{'_select'}->css_class ? (
-			['a', 'class', $self->{'_select'}->css_class],
-		) : (),
-		defined $self->{'_select'}->id ? (
-			['a', 'name', $self->{'_select'}->id],
-			['a', 'id', $self->{'_select'}->id],
-		) : (),
-		defined $self->{'_select'}->size ? (
-			['a', 'size', $self->{'_select'}->size],
-		) : (),
-		$self->{'_select'}->disabled ? (
-			['a', 'disabled', 'disabled'],
-		) : (),
+		tags_value($self, $self->{'_select'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_select'}, 'id'),
+		tags_value($self, $self->{'_select'}, 'name'),
+		tags_value($self, $self->{'_select'}, 'size'),
+		tags_boolean($self, $self->{'_select'}, 'disabled'),
 		# TODO Other. https://www.w3schools.com/tags/tag_select.asp
 	);
 	tags_data($self, $self->{'_select'});
