@@ -7,7 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
-use Tags::HTML::Element::Utils qw(tags_data);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_data tags_value);
 
 our $VERSION = 0.05;
 
@@ -45,22 +45,11 @@ sub _process {
 
 	$self->{'tags'}->put(
 		['b', 'option'],
-		defined $self->{'_option'}->css_class ? (
-			['a', 'class', $self->{'_option'}->css_class],
-		) : (),
-		defined $self->{'_option'}->id ? (
-			['a', 'name', $self->{'_option'}->id],
-			['a', 'id', $self->{'_option'}->id],
-		) : (),
-		$self->{'_option'}->disabled ? (
-			['a', 'disabled', 'disabled'],
-		) : (),
-		$self->{'_option'}->selected ? (
-			['a', 'selected', 'selected'],
-		) : (),
-		defined $self->{'_option'}->value ? (
-			['a', 'value', $self->{'_option'}->value],
-		) : (),
+		tags_value($self, $self->{'_option'}, 'css_class', 'class'),
+		tags_value($self, $self->{'_option'}, 'id'),
+		tags_boolean($self, $self->{'_option'}, 'disabled'),
+		tags_boolean($self, $self->{'_option'}, 'selected'),
+		tags_value($self, $self->{'_option'}, 'value'),
 		# TODO Other. https://www.w3schools.com/tags/tag_option.asp
 	);
 	tags_data($self, $self->{'_option'});

@@ -37,7 +37,7 @@ $obj->init($option);
 $obj->process;
 $ret = $tags->flush(1);
 $right_ret = <<'END';
-<option name="one" id="one">Option</option>
+<option id="one">Option</option>
 END
 chomp $right_ret;
 is($ret, $right_ret, "Option (plain).");
@@ -56,7 +56,7 @@ $obj->init($option);
 $obj->process;
 $ret = $tags->flush(1);
 $right_ret = <<'END';
-<option name="one" id="one">Option</option>
+<option id="one">Option</option>
 END
 chomp $right_ret;
 is($ret, $right_ret, "Option (tags).");
@@ -79,7 +79,7 @@ $obj->init($option);
 $obj->process;
 $ret = $tags->flush(1);
 $right_ret = <<'END';
-<option name="one" id="one">Option</option>
+<option id="one">Option</option>
 END
 chomp $right_ret;
 is($ret, $right_ret, "Option (callback).");
