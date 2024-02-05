@@ -1,4 +1,4 @@
-0.05
+0.05 2024-02-05T19:09:13+01:00
  - Add missing label to Select.
  - Rewrite Option to use of tags_value() and tags_boolean() helpers.
  - Rewrite Select to use of tags_value() and tags_boolean() helpers.
