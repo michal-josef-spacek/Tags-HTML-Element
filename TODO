@@ -1,6 +1,5 @@
 TODO
 ====
-4. Form: Add tests.
 5. Form: Optimize CSS
 6. Form: Example to doc as psgi server.
 7. Form: Look to CSS selector '$css-class input, textarea' in Form. If select
@@ -14,7 +13,9 @@ buttons or other.
 Maybe simplify, because inner content is similar as e.g. option.
 17. Check doc of all elements (init, cleanup, etc)
 19. Improve required CSS? There is required="required".
-20.
+20. Form: We need to have option to CSS selector for situation if obj->css_class
+not present. Probably 'form' element. Add tests.
+21.
 
 Applied
 =======
@@ -42,3 +43,6 @@ OK [20240124] skim
 
 18. Item: Tests.
 NONE [20240126] skim
+
+4. Form: Add tests.
+OK [20240205] skim

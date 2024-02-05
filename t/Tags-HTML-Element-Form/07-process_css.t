@@ -6,7 +6,7 @@ use Data::HTML::Element::Form;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Form;
-use Test::More 'tests' => 3;
+use Test::More 'tests' => 4;
 use Test::NoWarnings;
 
 # Test.
@@ -40,6 +40,19 @@ is_deeply(
 		['e'],
 	],
 	'Form CSS code.',
+);
+
+# Test.
+$css = CSS::Struct::Output::Structure->new;
+$obj = Tags::HTML::Element::Form->new(
+	'css' => $css,
+);
+$obj->process_css;
+$ret_ar = $css->flush(1);
+is_deeply(
+	$ret_ar,
+	[],
+	'Form CSS code (nothing, without init).',
 );
 
 # Test.
