@@ -8,7 +8,7 @@ use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
 use Tags::HTML::Element::Option;
-use Tags::HTML::Element::Utils qw(tags_boolean tags_data tags_value);
+use Tags::HTML::Element::Utils qw(tags_boolean tags_data tags_label tags_value);
 
 our $VERSION = 0.05;
 
@@ -50,6 +50,7 @@ sub _process {
 	}
 
 	$self->{'tags'}->put(
+		tags_label($self, $self->{'_select'}),
 		['b', 'select'],
 		tags_value($self, $self->{'_select'}, 'css_class', 'class'),
 		tags_value($self, $self->{'_select'}, 'id'),
