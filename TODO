@@ -4,13 +4,7 @@ TODO
 6. Form: Example to doc as psgi server.
 7. Form: Look to CSS selector '$css-class input, textarea' in Form. If select
    >>$css_class textarea<< or simple textarea.
-8. Form: Helper for button element.
-9. Form: CSS style for option.
 10. Form: Test other input[type=*] and CSS. And add selector to CSS.
-11. Form:Remove 'submit' param and add to fields. For possibility of two submit
-buttons or other.
-16. Move Element::Form to Form. And add Element::Form in same way as other.
-Maybe simplify, because inner content is similar as e.g. option.
 17. Check doc of all elements (init, cleanup, etc)
 19. Improve required CSS? There is required="required".
 20. Form: We need to have option to CSS selector for situation if obj->css_class
@@ -46,3 +40,17 @@ NONE [20240126] skim
 
 4. Form: Add tests.
 OK [20240205] skim
+
+16. Move Element::Form to Form. And add Element::Form in same way as other.
+Maybe simplify, because inner content is similar as e.g. option.
+OK [20240205] skim
+
+11. Form: Remove 'submit' param and add to fields. For possibility of two submit
+buttons or other.
+OK [20240205] skim
+
+8. Form: Helper for button element.
+NONE [20240205] skim
+
+9. Form: CSS style for option.
+NONE [20240205] skim
