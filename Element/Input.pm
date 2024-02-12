@@ -105,6 +105,7 @@ sub _process_css {
 		['s', 'input'.$css_class.'[type=date]'],
 		['s', 'input'.$css_class.'[type=number]'],
 		['s', 'input'.$css_class.'[type=email]'],
+		['s', 'input'.$css_class.'[type=checkbox]'],
 		['d', 'width', '100%'],
 		['d', 'padding', '12px 20px'],
 		['d', 'margin', '8px 0'],
