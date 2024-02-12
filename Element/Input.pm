@@ -114,6 +114,21 @@ sub _process_css {
 		['d', 'box-sizing', 'border-box'],
 		['e'],
 
+		['s', 'input'.$css_class.'[type=button]'],
+		['d', 'width', '100%'],
+		['d', 'background-color', '#4CAF50'],
+		['d', 'color', 'white'],
+		['d', 'padding', '14px 20px'],
+		['d', 'margin', '8px 0'],
+		['d', 'border', 'none'],
+		['d', 'border-radius', '4px'],
+		['d', 'cursor', 'pointer'],
+		['e'],
+
+		['s', 'input'.$css_class.'[type=button]:hover'],
+		['d', 'background-color', '#45a049'],
+		['e'],
+
 		['s', $css_required],
 		['d', 'color', 'red'],
 		['e'],
