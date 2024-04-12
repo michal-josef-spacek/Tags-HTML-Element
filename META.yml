@@ -7,7 +7,7 @@ build_requires:
   CSS::Struct::Output::Structure: 0.03
   Data::HTML::Element::Button: 0.1
   Data::HTML::Element::Form: 0.1
-  Data::HTML::Element::Input: 0.11
+  Data::HTML::Element::Input: 0.13
   Data::HTML::Element::Select: 0.1
   Data::HTML::Element::Textarea: 0.1
   English: 0

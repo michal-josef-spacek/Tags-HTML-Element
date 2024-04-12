@@ -59,6 +59,7 @@ sub _process {
 		tags_boolean($self, $self->{'_input'}, 'disabled'),
 		tags_value($self, $self->{'_input'}, 'min'),
 		tags_value($self, $self->{'_input'}, 'max'),
+		tags_value($self, $self->{'_input'}, 'step'),
 		tags_value($self, $self->{'_input'}, 'onclick'),
 		['e', 'input'],
 	);
