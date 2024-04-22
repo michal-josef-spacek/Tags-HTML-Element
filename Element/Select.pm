@@ -57,6 +57,7 @@ sub _process {
 		tags_value($self, $self->{'_select'}, 'name'),
 		tags_value($self, $self->{'_select'}, 'size'),
 		tags_boolean($self, $self->{'_select'}, 'disabled'),
+		tags_value($self, $self->{'_select'}, 'onchange'),
 		# TODO Other. https://www.w3schools.com/tags/tag_select.asp
 	);
 	tags_data($self, $self->{'_select'});
