@@ -5,9 +5,9 @@ use Data::HTML::Element::Option;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Option;
+use Tags::Output::Raw;
 use Test::More 'tests' => 7;
 use Test::NoWarnings;
-use Tags::Output::Raw;
 
 # Test.
 my $tags = Tags::Output::Raw->new;

@@ -5,9 +5,9 @@ use Data::HTML::Element::Textarea;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Textarea;
+use Tags::Output::Structure;
 use Test::More 'tests' => 6;
 use Test::NoWarnings;
-use Tags::Output::Structure;
 
 # Test.
 my $tags = Tags::Output::Structure->new;
