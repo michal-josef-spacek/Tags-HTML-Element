@@ -1,6 +1,7 @@
 0.14
  - Add test for Option.
  - Add tests for Select.
+ - Add tests for Textarea.
  - Remove obsolete code.
  - Rewrite tests from CSS::Struct::Output::Indent to
    CSS::Struct::Output::Structure.

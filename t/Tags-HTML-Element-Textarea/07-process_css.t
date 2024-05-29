@@ -6,7 +6,7 @@ use Data::HTML::Element::Textarea;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Textarea;
-use Test::More 'tests' => 5;
+use Test::More 'tests' => 6;
 use Test::NoWarnings;
 
 # Test.
@@ -66,6 +66,19 @@ is_deeply(
 		['e'],
 	],
 	'Get CSS::Struct code (with CSS class).',
+);
+
+# Test.
+$css = CSS::Struct::Output::Structure->new;
+$obj = Tags::HTML::Element::Textarea->new(
+	'css' => $css,
+);
+$obj->process_css;
+$ret_ar = $css->flush(1);
+is_deeply(
+	$ret_ar,
+	[],
+	'Get CSS::Struct code (without initialization).',
 );
 
 # Test.
