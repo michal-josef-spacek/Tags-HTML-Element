@@ -9,7 +9,8 @@ TODO
 19. Improve required CSS? There is required="required".
 20. Form: We need to have option to CSS selector for situation if obj->css_class
 not present. Probably 'form' element. Add tests.
-22.
+22. Rewrite from CSS::Struct::Output::Indent to CSS::Struct::Output::Structure.
+23.
 
 Applied
 =======
