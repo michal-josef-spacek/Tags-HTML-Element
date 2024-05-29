@@ -15,6 +15,12 @@ my $obj = Tags::HTML::Element::Form->new;
 isa_ok($obj, 'Tags::HTML::Element::Form');
 
 # Test.
+$obj = Tags::HTML::Element::Form->new(
+	'tags' => Tags::Output::Raw->new,
+);
+isa_ok($obj, 'Tags::HTML::Element::Form');
+
+# Test.
 eval {
 	Tags::HTML->new(
 		'css' => 'bad_css',
@@ -33,12 +39,6 @@ eval {
 is($EVAL_ERROR, "Parameter 'css' must be a 'CSS::Struct::Output::*' class.\n",
 	"Parameter 'css' must be a 'CSS::Struct::Output::*' class.");
 clean();
-
-# Test.
-$obj = Tags::HTML::Element::Form->new(
-	'tags' => Tags::Output::Raw->new,
-);
-isa_ok($obj, 'Tags::HTML::Element::Form');
 
 # Test.
 eval {
