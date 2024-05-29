@@ -1,4 +1,5 @@
 0.13
+ - Remove 'tags' setting in tests for init(). Not needed.
  - Sort modules in tests.
  - Sort tests in each constructor test file.
 
