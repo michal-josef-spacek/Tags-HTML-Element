@@ -25,7 +25,6 @@ requires 'Tags::HTML' => 0.06;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Tags-HTML-Element/issues';
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Tags-HTML-Element';
 resources 'repository' => 'git://github.com/michal-josef-spacek/Tags-HTML-Element';
-test_requires 'CSS::Struct::Output::Indent' => 0;
 test_requires 'CSS::Struct::Output::Structure' => 0.03;
 test_requires 'Data::HTML::Element::Button' => 0.10;
 test_requires 'Data::HTML::Element::Form' => 0.10;

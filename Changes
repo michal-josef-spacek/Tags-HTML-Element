@@ -1,4 +1,6 @@
 0.14
+ - Rewrite tests from CSS::Struct::Output::Indent to
+   CSS::Struct::Output::Structure.
 
 0.13 2024-05-29T13:36:14+02:00
  - Fix test code (trailing ',').
