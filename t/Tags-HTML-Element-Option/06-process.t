@@ -101,4 +101,3 @@ eval {
 };
 is($EVAL_ERROR, "Parameter 'tags' isn't defined.\n", "Parameter 'tags' isn't defined.");
 clean();
-
