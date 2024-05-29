@@ -5,24 +5,27 @@ use Data::HTML::Element::Select;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Select;
-use Tags::Output::Raw;
+use Tags::Output::Structure;
 use Test::More 'tests' => 3;
 use Test::NoWarnings;
 
 # Test.
-my $tags = Tags::Output::Raw->new;
+my $tags = Tags::Output::Structure->new;
 my $select = Data::HTML::Element::Select->new;
 my $obj = Tags::HTML::Element::Select->new(
 	'tags' => $tags,
 );
 $obj->init($select);
 $obj->process;
-my $ret = $tags->flush(1);
-my $right_ret = <<'END';
-<select></select>
-END
-chomp $right_ret;
-is($ret, $right_ret, "Select defaults.");
+my $ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'select'],
+		['e', 'select'],
+	],
+	'Get Tags code (default).',
+);
 
 # Test.
 $obj = Tags::HTML::Element::Select->new;

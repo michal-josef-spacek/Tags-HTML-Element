@@ -1,5 +1,6 @@
 0.13
  - Remove 'tags' setting in tests for init(). Not needed.
+ - Rewrite tests from Tags::Output::Raw to Tags::Output::Structure.
  - Sort modules in tests.
  - Sort tests in each constructor test file.
 

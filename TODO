@@ -9,7 +9,6 @@ TODO
 19. Improve required CSS? There is required="required".
 20. Form: We need to have option to CSS selector for situation if obj->css_class
 not present. Probably 'form' element. Add tests.
-21. Rewrite tests from Tags::Output::Raw to Tags::Output::Structure.
 22.
 
 Applied
@@ -55,3 +54,6 @@ NONE [20240205] skim
 
 9. Form: CSS style for option.
 NONE [20240205] skim
+
+21. Rewrite tests from Tags::Output::Raw to Tags::Output::Structure.
+OK [20240529] skim

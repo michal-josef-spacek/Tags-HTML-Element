@@ -6,7 +6,7 @@ use Data::HTML::Element::Input;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Form;
-use Tags::Output::Raw;
+use Tags::Output::Structure;
 use Test::More 'tests' => 7;
 use Test::NoWarnings;
 
@@ -16,7 +16,7 @@ isa_ok($obj, 'Tags::HTML::Element::Form');
 
 # Test.
 $obj = Tags::HTML::Element::Form->new(
-	'tags' => Tags::Output::Raw->new,
+	'tags' => Tags::Output::Structure->new,
 );
 isa_ok($obj, 'Tags::HTML::Element::Form');
 

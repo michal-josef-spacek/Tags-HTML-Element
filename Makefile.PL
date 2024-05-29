@@ -34,7 +34,6 @@ test_requires 'Data::HTML::Element::Select' => 0.14;
 test_requires 'Data::HTML::Element::Textarea' => 0.10;
 test_requires 'English' => 0;
 test_requires 'Error::Pure::Utils' => 0;
-test_requires 'Tags::Output::Raw' => 0;
 test_requires 'Tags::Output::Structure' => 0;
 test_requires 'Test::MockObject' => 0;
 test_requires 'Test::More' => 0;

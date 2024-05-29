@@ -4,7 +4,7 @@ use warnings;
 use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Input;
-use Tags::Output::Raw;
+use Tags::Output::Structure;
 use Test::More 'tests' => 7;
 use Test::NoWarnings;
 
@@ -14,7 +14,7 @@ isa_ok($obj, 'Tags::HTML::Element::Input');
 
 # Test.
 $obj = Tags::HTML::Element::Input->new(
-	'tags' => Tags::Output::Raw->new,
+	'tags' => Tags::Output::Structure->new,
 );
 isa_ok($obj, 'Tags::HTML::Element::Input');
 
