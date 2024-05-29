@@ -8,7 +8,7 @@ use Readonly;
 
 Readonly::Array our @EXPORT_OK => qw(tags_boolean tags_data tags_label tags_value);
 
-our $VERSION = 0.13;
+our $VERSION = 0.14;
 
 sub tags_boolean {
 	my ($self, $element, $method) = @_;
@@ -219,6 +219,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.13
+0.14
 
 =cut
