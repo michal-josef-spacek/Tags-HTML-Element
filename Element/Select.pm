@@ -4,7 +4,6 @@ use base qw(Tags::HTML);
 use strict;
 use warnings;
 
-use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use Scalar::Util qw(blessed);
 use Tags::HTML::Element::Option;

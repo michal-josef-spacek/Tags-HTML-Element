@@ -1,4 +1,5 @@
 0.14
+ - Remove obsolete code.
  - Rewrite tests from CSS::Struct::Output::Indent to
    CSS::Struct::Output::Structure.
 
