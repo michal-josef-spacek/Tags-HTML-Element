@@ -17,7 +17,7 @@ my $ret = $obj->process_css;
 is($ret, undef, 'No css mode.');
 
 # Test.
-my $css = CSS::Struct::Output::Indent->new,;
+my $css = CSS::Struct::Output::Indent->new;
 $obj = Tags::HTML::Element::Textarea->new(
 	'css' => $css,
 );
@@ -40,7 +40,7 @@ chomp $right_ret;
 is($ret, $right_ret, "Textarea defaults.");
 
 # Test.
-$css = CSS::Struct::Output::Indent->new,;
+$css = CSS::Struct::Output::Indent->new;
 $obj = Tags::HTML::Element::Textarea->new(
 	'css' => $css,
 );

@@ -10,7 +10,7 @@ use Test::More 'tests' => 4;
 use Test::NoWarnings;
 
 # Test.
-my $css = CSS::Struct::Output::Indent->new,;
+my $css = CSS::Struct::Output::Indent->new;
 my $option = Data::HTML::Element::Option->new;
 my $obj = Tags::HTML::Element::Option->new(
 	'css' => $css,

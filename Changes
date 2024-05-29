@@ -1,4 +1,5 @@
 0.13
+ - Fix test code (trailing ',').
  - Remove 'tags' setting in tests for init(). Not needed.
  - Rewrite tests from Tags::Output::Raw to Tags::Output::Structure.
  - Sort modules in tests.

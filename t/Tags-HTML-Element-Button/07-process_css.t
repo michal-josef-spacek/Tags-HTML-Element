@@ -37,7 +37,7 @@ chomp $right_ret;
 is($ret, $right_ret, "Button defaults.");
 
 # Test.
-$css = CSS::Struct::Output::Indent->new,;
+$css = CSS::Struct::Output::Indent->new;
 $obj = Tags::HTML::Element::Button->new(
 	'css' => $css,
 );
