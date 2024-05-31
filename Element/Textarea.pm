@@ -26,7 +26,7 @@ sub _init {
 		|| ! blessed($textarea)
 		|| ! $textarea->isa('Data::HTML::Element::Textarea')) {
 
-		err "Input object must be a 'Data::HTML::Element::Textarea' instance.";
+		err "Textarea object must be a 'Data::HTML::Element::Textarea' instance.";
 	}
 
 	$self->{'_textarea'} = $textarea;
@@ -199,7 +199,7 @@ Returns undef.
  init():
          From Tags::HTML::process():
                  Parameter 'tags' isn't defined.
-         Input object must be a 'Data::HTML::Element::Textarea' instance.
+         Textarea object must be a 'Data::HTML::Element::Textarea' instance.
 
 =head1 EXAMPLE
 
