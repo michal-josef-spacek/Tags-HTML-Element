@@ -227,8 +227,7 @@ Returns undef.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
 
  init():
-         From Tags::HTML::init():
-                 Form object must be a 'Data::HTML::Element::Form' instance.
+         Form object must be a 'Data::HTML::Element::Form' instance.
 
  process():
          From Tags::HTML::process():

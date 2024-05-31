@@ -198,15 +198,16 @@ Returns undef.
                  Parameter 'css' must be a 'CSS::Struct::Output::*' class.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
 
+ init():
+         Select object must be a 'Data::HTML::Element::Select' instance.
+
  process():
          From Tags::HTML::process():
                  Parameter 'tags' isn't defined.
-         Input object must be a 'Data::HTML::Element::Select' instance.
 
  process_css():
          From Tags::HTML::process_css():
                  Parameter 'css' isn't defined.
-         Input object must be a 'Data::HTML::Element::Select' instance.
 
 =head1 EXAMPLE
 

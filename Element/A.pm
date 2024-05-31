@@ -166,6 +166,8 @@ Returns undef.
          From Tags::HTML::new():
                  Parameter 'css' must be a 'CSS::Struct::Output::*' class.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
+
+ init():
          Anchor object must be a 'Data::HTML::Element::A' instance.
 
  process():

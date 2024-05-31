@@ -197,9 +197,15 @@ Returns undef.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
 
  init():
+         Textarea object must be a 'Data::HTML::Element::Textarea' instance.
+
+ process():
          From Tags::HTML::process():
                  Parameter 'tags' isn't defined.
-         Textarea object must be a 'Data::HTML::Element::Textarea' instance.
+
+ process_css():
+         From Tags::HTML::process_css():
+                 Parameter 'css' isn't defined.
 
 =head1 EXAMPLE
 
