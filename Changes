@@ -1,5 +1,6 @@
 0.15
  - Fix error mesaage for A.
+ - Fix error message for Button.
 
 0.14 2024-05-29T22:59:40+02:00
  - Add test for Option.

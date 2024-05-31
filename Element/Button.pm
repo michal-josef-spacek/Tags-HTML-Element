@@ -26,7 +26,7 @@ sub _init {
 		|| ! blessed($button)
 		|| ! $button->isa('Data::HTML::Element::Button')) {
 
-		err "Input object must be a 'Data::HTML::Element::Button' instance.";
+		err "Button object must be a 'Data::HTML::Element::Button' instance.";
 	}
 
 	$self->{'_button'} = $button;
@@ -195,7 +195,7 @@ Returns undef.
          From Tags::HTML::new():
                  Parameter 'css' must be a 'CSS::Struct::Output::*' class.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
-         Input object must be a 'Data::HTML::Element::Button' instance.
+         Button object must be a 'Data::HTML::Element::Button' instance.
 
  process():
          From Tags::HTML::process():
