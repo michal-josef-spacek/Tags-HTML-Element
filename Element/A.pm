@@ -26,7 +26,7 @@ sub _init {
 		|| ! blessed($a)
 		|| ! $a->isa('Data::HTML::Element::A')) {
 
-		err "Input object must be a 'Data::HTML::Element::A' instance.";
+		err "Anchor object must be a 'Data::HTML::Element::A' instance.";
 	}
 
 	$self->{'_a'} = $a;
@@ -166,7 +166,7 @@ Returns undef.
          From Tags::HTML::new():
                  Parameter 'css' must be a 'CSS::Struct::Output::*' class.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
-         Input object must be a 'Data::HTML::Element::A' instance.
+         Anchor object must be a 'Data::HTML::Element::A' instance.
 
  process():
          From Tags::HTML::process():
