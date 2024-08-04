@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Element::Button;
 use Tags::Output::Structure;
-use Test::More 'tests' => 6;
+use Test::More 'tests' => 7;
 use Test::NoWarnings;
 
 # Test.
@@ -52,6 +52,32 @@ is_deeply(
 		['e', 'button'],
 	],
 	'Get Tags code (with CSS class, name and value).',
+);
+
+# Test.
+$tags = Tags::Output::Structure->new;
+$obj = Tags::HTML::Element::Button->new(
+	'tags' => $tags,
+);
+$button = Data::HTML::Element::Button->new(
+	'form' => 'button-form',
+	'name' => 'button-name',
+	'value' => 'button value',
+);
+$obj->init($button);
+$obj->process;
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'button'],
+		['a', 'type', 'button'],
+		['a', 'name', 'button-name'],
+		['a', 'value', 'button value'],
+		['a', 'form', 'button-form'],
+		['e', 'button'],
+	],
+	'Get Tags code (with form, name and value).',
 );
 
 # Test.

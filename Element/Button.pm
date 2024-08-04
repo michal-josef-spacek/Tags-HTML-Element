@@ -51,6 +51,7 @@ sub _process {
 		tags_value($self, $self->{'_button'}, 'value'),
 		tags_boolean($self, $self->{'_button'}, 'autofocus'),
 		tags_boolean($self, $self->{'_button'}, 'disabled'),
+		tags_value($self, $self->{'_button'}, 'form'),
 	);
 	tags_data($self, $self->{'_button'});
 	$self->{'tags'}->put(
